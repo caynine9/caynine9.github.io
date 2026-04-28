@@ -1,0 +1,11 @@
+---
+title: "A Minimalist Post"
+description: "This post does not have a cover image to demonstrate the nullable cover image functionality."
+pubDate: "2026-04-26"
+---
+
+Sometimes you just want to write without worrying about finding the perfect cover image. 
+
+The `cover_image` field in our `src/content/config.ts` is explicitly set to be optional using `z.optional(image())`. 
+
+Our UI gracefully adapts to this. If there's no cover image, the post layout simply moves the title to the top without leaving any awkward blank space. This is part of the clean, content-first philosophy of our design.

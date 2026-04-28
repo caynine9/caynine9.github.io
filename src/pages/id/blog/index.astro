@@ -1,0 +1,46 @@
+---
+import BaseHead from "../../../components/BaseHead.astro";
+import Header from "../../../components/Header.svelte";
+import Footer from "../../../components/Footer.svelte";
+import Card from "../../../components/Card.svelte";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../../consts";
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .filter(post => post.id.startsWith('id/'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<!doctype html>
+<html lang="id">
+	<head>
+		<BaseHead title={`Blog | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header client:load currentPath={Astro.url.pathname} />
+		<main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24">
+			<div class="mb-16 text-center">
+				<h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">Blog</h1>
+				<p class="text-xl opacity-70 max-w-2xl mx-auto">
+					Pikiran, ide, dan cerita yang ditulis dalam ruang yang bersih.
+				</p>
+			</div>
+			
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+				{
+					posts.map((post) => (
+						<Card 
+							title={post.data.title}
+							description={post.data.description}
+							date={post.data.pubDate}
+							url={`/id/blog/${post.id.replace('id/', '')}/`}
+							coverImage={post.data.cover_image?.src}
+							client:load
+						/>
+					))
+				}
+			</div>
+		</main>
+		<Footer client:idle />
+	</body>
+</html>

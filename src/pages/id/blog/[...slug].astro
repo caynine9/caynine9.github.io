@@ -1,0 +1,119 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import { render } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseHead from '../../../components/BaseHead.astro';
+import Header from '../../../components/Header.svelte';
+import Footer from '../../../components/Footer.svelte';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+  const idPosts = posts.filter(post => post.id.startsWith('id/'));
+	return idPosts.map((post) => ({
+		params: { slug: post.id.replace('id/', '') },
+		props: post,
+	}));
+}
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props;
+const { Content } = await render(post);
+
+const formattedDate = new Date(post.data.pubDate).toLocaleDateString('id-id', {
+	year: 'numeric',
+	month: 'short',
+	day: 'numeric',
+});
+---
+
+<!doctype html>
+<html lang="id">
+	<head>
+		<BaseHead title={post.data.title} description={post.data.description} />
+	</head>
+	<body>
+		<Header client:load currentPath={Astro.url.pathname} />
+		<main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24">
+			<article class="prose prose-lg dark:prose-invert max-w-none">
+				{post.data.cover_image && (
+					<div class="mb-8 rounded-3xl overflow-hidden glass shadow-lg">
+						<Image src={post.data.cover_image} alt={post.data.title} class="w-full h-auto object-cover max-h-[500px]" />
+					</div>
+				)}
+				
+				<header class="mb-10 text-center">
+					<div class="text-sm font-medium opacity-60 mb-3 tracking-widest uppercase">
+						{formattedDate}
+					</div>
+					<h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">{post.data.title}</h1>
+					{post.data.updatedDate && (
+						<div class="italic text-sm opacity-60">
+							Terakhir diperbarui pada <time>{new Date(post.data.updatedDate).toLocaleDateString('id-id', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
+						</div>
+					)}
+					<hr class="mt-8 border-gray-200 dark:border-gray-800" />
+				</header>
+				
+				<div class="blog-content">
+					<Content />
+				</div>
+			</article>
+		</main>
+		<Footer client:idle />
+	</body>
+</html>
+
+<style is:global>
+	.blog-content h1, .blog-content h2, .blog-content h3, .blog-content h4 {
+		font-weight: 700;
+		margin-top: 2em;
+		margin-bottom: 0.5em;
+		letter-spacing: -0.025em;
+	}
+	.blog-content h2 { font-size: 1.875rem; }
+	.blog-content h3 { font-size: 1.5rem; }
+	.blog-content p {
+		margin-bottom: 1.5em;
+		line-height: 1.75;
+	}
+	.blog-content a {
+		color: var(--color-apple-link);
+		text-decoration: underline;
+		text-underline-offset: 4px;
+	}
+	.blog-content img {
+		border-radius: 1rem;
+		margin: 2em auto;
+	}
+	.blog-content blockquote {
+		border-left: 4px solid #e5e7eb;
+		padding-left: 1rem;
+		font-style: italic;
+		color: #6b7280;
+	}
+	:root.dark .blog-content blockquote {
+		border-left-color: #374151;
+		color: #9ca3af;
+	}
+	.blog-content pre {
+		padding: 1.5rem;
+		border-radius: 1.25rem;
+		overflow-x: auto;
+		margin: 2.5em 0;
+		font-size: 0.875rem;
+		line-height: 1.7;
+		border: 1px solid var(--border);
+	}
+	.blog-content code {
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+	}
+	.blog-content :not(pre) > code {
+		background: rgba(0, 0, 0, 0.05);
+		padding: 0.2em 0.4em;
+		border-radius: 0.4em;
+		font-size: 0.9em;
+	}
+	:root.dark .blog-content :not(pre) > code {
+		background: rgba(255, 255, 255, 0.1);
+	}
+</style>

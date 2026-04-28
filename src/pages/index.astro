@@ -1,0 +1,429 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.svelte";
+import Footer from "../components/Footer.svelte";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+
+const projects = [
+	{
+		title: "EDUNUSA",
+		description:
+			"Developing a comprehensive educational ecosystem using Kotlin Multiplatform (KMP), supporting both Android and iOS with Compose Multiplatform.",
+		link: "#",
+		tags: [
+			"Kotlin Multiplatform",
+			"Compose Multiplatform",
+			"Android",
+			"iOS",
+		],
+		category: "Work Related",
+	},
+	{
+		title: "EDUNUSA CBT",
+		description:
+			"A Computer Based Test (CBT) application built with Kotlin Multiplatform (KMP) to ensure a seamless and secure examination experience across Android and iOS devices.",
+		link: "#",
+		tags: [
+			"Kotlin Multiplatform",
+			"Compose Multiplatform",
+			"Android",
+			"iOS",
+		],
+		category: "Work Related",
+	},
+	{
+		title: "Moove",
+		description:
+			"Automatic Itinerary Vacation Planning app developed as a Bangkit 2024 Capstone Project. Features MVVM architecture and Retrofit integration.",
+		link: "#",
+		tags: ["Kotlin", "Android"],
+		category: "Research Project",
+	},
+	{
+		title: "FireGuard",
+		description:
+			"IoT-based Agrotech Innovation for real-time forest fire monitoring. Integrated OpenWeatherMap API and sensor communication via REST API.",
+		link: "#",
+		tags: ["Kotlin", "Android"],
+		category: "Research Project",
+	},
+];
+
+const experience = [
+	{
+		company: "Freelance",
+		location: "Remote",
+		role: "Mobile Developer",
+		period: "Mar 2026 — Present",
+		description:
+			"Continuing the development and maintenance of the EDUNUSA ecosystem for PT Instrumeta Teknologi Nusantara as a freelance developer.",
+		highlights: [
+			"Migrated core components to Kotlin Multiplatform (KMP) for iOS support.",
+			"Developing new features and optimizing existing codebase.",
+			"Ensuring continuous delivery and app store maintenance.",
+		],
+    icon: "💻"
+	},
+	{
+		company: "PT Instrumeta Teknologi Nusantara",
+		location: "Banjarbaru, South Kalimantan",
+		role: "Mobile Developer (Contract)",
+		period: "Nov 2025 — Feb 2026",
+		description:
+			"Developing modern Android applications using Kotlin and Jetpack Compose. Focused on educational tools and large-scale application ecosystems.",
+		highlights: [
+			"Developed EDUNUSA and EDUNUSA CBT.",
+			"Integrated complex RESTful APIs for real-time data handling.",
+			"Implemented clean architecture patterns for maintainable codebases.",
+		],
+    icon: "🏢"
+	},
+	{
+		company: "Bangkit Academy 2024",
+		location: "Remote (Google, GoTo, Traveloka)",
+		role: "Mobile Development Cohort",
+		period: "Feb 2024 — Jul 2024",
+		description:
+			"Intensive training on Android development and soft skills. Part of MSIB Kampus Merdeka Batch 6.",
+		highlights: [
+			"Mastered Android fundamentals and advanced concepts.",
+			"Developed 'Moove' as a capstone project with a cross-functional team.",
+		],
+    icon: "🎓"
+	},
+];
+
+const skillCategories = [
+	{
+		name: "Mobile Development",
+		skills: [
+			"Kotlin",
+			"Jetpack Compose",
+			"Compose Multiplatform",
+			"KMP",
+			"Android Native",
+			"Swift Fundamentals",
+		],
+	},
+	{
+		name: "Backend & Systems",
+		skills: [
+			"Java (Spring Boot)",
+			"Go",
+			"PostgreSQL",
+			"MySQL",
+			"RESTful API",
+		],
+	},
+	{
+		name: "Web & Tools",
+		skills: ["Svelte", "Tailwind CSS", "Git", "Postman"],
+	},
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header client:load currentPath={Astro.url.pathname} />
+
+		<!-- Ambient Background -->
+		<div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+			<div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] sm:w-[800px] sm:h-[800px] rounded-full bg-blue-400/20 dark:bg-blue-600/20 blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-blob"></div>
+			<div class="absolute top-[20%] right-[-10%] w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] rounded-full bg-purple-400/20 dark:bg-purple-600/20 blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-blob animation-delay-2000"></div>
+			<div class="absolute bottom-[-10%] left-[20%] w-[500px] h-[500px] sm:w-[700px] sm:h-[700px] rounded-full bg-pink-400/20 dark:bg-pink-600/20 blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-blob animation-delay-4000"></div>
+		</div>
+
+		<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+			<!-- Hero / Profile Section -->
+			<section
+				class="py-20 sm:py-32 flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-20"
+			>
+				<div class="flex-1 text-center md:text-left order-2 md:order-1">
+					<h1
+						class="text-5xl sm:text-7xl font-extrabold tracking-tight mb-8 leading-[1.1] text-gradient"
+					>
+						Hi, I'm <span class="text-blue-500">Tantowi.</span>
+						<br />Software Engineer.
+					</h1>
+					<p
+						class="text-xl sm:text-2xl opacity-70 leading-relaxed mb-12 max-w-2xl"
+					>
+						Software Engineer specializing in building
+						high-performance <strong>Mobile</strong> experiences and robust
+						<strong>Backend</strong> systems. I transform complex ideas
+						into seamless end-to-end digital solutions.
+					</p>
+					<div
+						class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4"
+					>
+						<a
+							href="/blog"
+							class="w-full sm:w-auto px-8 py-4 rounded-full bg-[var(--text)] text-[var(--bg)] font-bold transition-all duration-300 shadow-xl shadow-black/10 dark:shadow-white/5 text-center hover:-translate-y-1 hover:shadow-2xl"
+						>
+							Read my Blog
+						</a>
+						<a
+							href="#portfolio"
+							class="w-full sm:w-auto px-8 py-4 rounded-full glass font-bold hover:bg-white/10 dark:hover:bg-white/20 transition-all duration-300 text-center hover:-translate-y-1 hover:shadow-lg"
+						>
+							View Portfolio
+						</a>
+						<a
+							href="#contact"
+							class="w-full sm:w-auto px-8 py-4 rounded-full glass bg-blue-500/90 hover:bg-blue-500 text-white font-bold transition-all duration-300 text-center hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(59,130,246,0.5)] border-blue-400"
+						>
+							Get in Touch
+						</a>
+					</div>
+				</div>
+
+				<div class="flex-shrink-0 order-1 md:order-2">
+					<div class="relative group">
+						<div
+							class="absolute -inset-4 bg-gradient-to-tr from-blue-500 to-purple-600 rounded-[3rem] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"
+						>
+						</div>
+						<div
+							class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-[3rem] overflow-hidden glass p-3 border-white/20 shadow-2xl"
+						>
+							<img
+								src="/profile.png"
+								alt="Muhammad Tantowi Jauhari"
+								class="w-full h-full object-cover rounded-[2.2rem]"
+							/>
+						</div>
+
+						<!-- Floating Decorative Elements -->
+						<div
+							class="absolute -bottom-6 -left-6 glass p-4 rounded-2xl shadow-xl animate-bounce"
+							style="animation-duration: 3s;"
+						>
+							<span class="text-2xl">💻</span>
+						</div>
+						<div
+							class="absolute -top-6 -right-6 glass p-4 rounded-2xl shadow-xl animate-bounce"
+							style="animation-duration: 4s;"
+						>
+							<span class="text-2xl">📱</span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Experience Section -->
+			<section class="py-24 border-t border-black/5 dark:border-white/5">
+				<div class="max-w-4xl mx-auto">
+					<h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-20 text-center">Professional Journey</h2>
+					
+          <div class="relative">
+            <!-- Vertical Timeline Line -->
+            <div class="absolute left-0 sm:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-blue-500 via-blue-500/20 to-transparent sm:-translate-x-1/2 hidden sm:block"></div>
+            
+            <div class="space-y-20">
+              {experience.map((item, index) => (
+                <div class={`relative flex flex-col sm:flex-row items-center gap-8 sm:gap-0 ${index % 2 === 0 ? 'sm:flex-row-reverse' : ''}`}>
+                  <!-- Timeline Dot -->
+                  <div class="absolute left-0 sm:left-1/2 top-0 sm:top-1/2 w-4 h-4 rounded-full bg-blue-500 border-4 border-[var(--bg)] sm:-translate-x-1/2 sm:-translate-y-1/2 z-10 hidden sm:block"></div>
+                  
+                  <!-- Content Card -->
+                  <div class="w-full sm:w-[45%]">
+                    <div class="glass-panel p-8 group">
+                      <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-2xl">
+                          {item.icon}
+                        </div>
+                        <div>
+                          <span class="text-[10px] font-bold uppercase tracking-widest text-blue-500">{item.period}</span>
+                          <h3 class="text-xl font-bold leading-tight">{item.role}</h3>
+                        </div>
+                      </div>
+                      
+                      <div class="mb-6">
+                        <div class="text-sm font-bold opacity-80 mb-1">{item.company}</div>
+                        <div class="text-[10px] opacity-50 uppercase tracking-wider">{item.location}</div>
+                      </div>
+
+                      <p class="text-sm opacity-70 mb-6 leading-relaxed">
+                        {item.description}
+                      </p>
+
+                      <ul class="space-y-3">
+                        {item.highlights.map(highlight => (
+                          <li class="flex items-start text-xs opacity-80 group-hover:opacity-100 transition-opacity">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500 mr-2 mt-0.5 flex-shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            {highlight}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <!-- Spacer for the other side on desktop -->
+                  <div class="hidden sm:block sm:w-[45%]"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+				</div>
+			</section>
+
+			<!-- Portfolio Section -->
+			<section
+				id="portfolio"
+				class="py-24 border-t border-black/5 dark:border-white/5"
+			>
+				<div class="flex items-center justify-between mb-16">
+					<div class="space-y-2">
+						<h2
+							class="text-3xl sm:text-4xl font-bold tracking-tight"
+						>
+							Featured Projects
+						</h2>
+						<p class="text-lg opacity-60">
+							A selection of my recent personal and professional
+							projects.
+						</p>
+					</div>
+				</div>
+
+				<div
+					class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+				>
+					{
+						projects.map((project) => (
+							<div class="glass-panel p-8 flex flex-col h-full relative overflow-hidden group">
+								<div class="flex items-center justify-between mb-8">
+									<div class="flex flex-wrap gap-2">
+										{project.tags.map((tag) => (
+											<span class="text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-500">
+												{tag}
+											</span>
+										))}
+									</div>
+									{project.category === "Work Related" && (
+										<span class="text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-orange-500/10 text-orange-500 flex items-center">
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width="10"
+												height="10"
+												viewBox="0 0 24 24"
+												fill="none"
+												stroke="currentColor"
+												stroke-width="3"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												class="mr-1"
+											>
+												<rect
+													x="2"
+													y="7"
+													width="20"
+													height="14"
+													rx="2"
+													ry="2"
+												/>
+												<path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+											</svg>
+											Work
+										</span>
+									)}
+								</div>
+
+								<h3 class="text-2xl font-bold mb-4">
+									{project.title}
+								</h3>
+								<p class="text-sm opacity-70 leading-relaxed mb-10 flex-grow">
+									{project.description}
+								</p>
+							</div>
+						))
+					}
+				</div>
+			</section>
+
+			<!-- Skills Section -->
+			<section class="py-24">
+				<div
+					class="glass-panel p-10 sm:p-16 relative overflow-hidden"
+				>
+					<div
+						class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
+					>
+					</div>
+					<div class="text-center mb-16">
+						<h2
+							class="text-4xl sm:text-5xl font-bold mb-6 tracking-tight"
+						>
+							Technical Stack.
+						</h2>
+						<p
+							class="text-xl opacity-70 max-w-2xl mx-auto leading-relaxed"
+						>
+							I leverage a diverse set of technologies to build
+							scalable, modern applications across the entire
+							stack.
+						</p>
+					</div>
+
+					<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+						{
+							skillCategories.map((category) => (
+								<div class="space-y-6">
+									<h3 class="text-lg font-bold uppercase tracking-widest text-blue-500">
+										{category.name}
+									</h3>
+									<div class="flex flex-wrap gap-3">
+										{category.skills.map((skill) => (
+											<span class="px-4 py-2 rounded-full glass text-xs font-bold shadow-sm hover:scale-105 hover:shadow-md transition-all cursor-default">
+												{skill}
+											</span>
+										))}
+									</div>
+								</div>
+							))
+						}
+					</div>
+				</div>
+			</section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="py-24 border-t border-black/5 dark:border-white/5 text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-8">Let's work together.</h2>
+        <p class="text-xl opacity-60 max-w-2xl mx-auto mb-12">
+          I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.
+        </p>
+        <div class="flex flex-wrap justify-center gap-6">
+          <a 
+            href="https://linkedin.com/in/mtantowij" 
+            target="_blank"
+            class="px-8 py-4 rounded-full bg-[#0077b5] text-white font-bold hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(0,119,181,0.4)] transition-all duration-300 flex items-center gap-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            LinkedIn
+          </a>
+          <a 
+            href="https://wa.me/628115114383" 
+            target="_blank"
+            class="px-8 py-4 rounded-full bg-[#25D366] text-white font-bold hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(37,211,102,0.4)] transition-all duration-300 flex items-center gap-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884 0 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            WhatsApp
+          </a>
+          <a 
+            href="mailto:tantowijauhari16@gmail.com" 
+            class="px-8 py-4 rounded-full glass font-bold hover:bg-white/10 dark:hover:bg-white/20 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex items-center gap-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            Email
+          </a>
+        </div>
+      </section>
+		</main>
+
+		<Footer client:idle />
+	</body>
+</html>

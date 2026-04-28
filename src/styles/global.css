@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --color-apple-bg: #f5f5f7;
+  --color-apple-card: rgba(245, 245, 247, 0.5);
+  --color-apple-card-dark: rgba(28, 28, 30, 0.7);
+  --color-apple-text: #1d1d1f;
+  --color-apple-text-dark: #f5f5f7;
+  --color-apple-link: #0066cc;
+}
+
+@layer base {
+  :root {
+    --bg: var(--color-apple-bg);
+    --text: var(--color-apple-text);
+    --card: var(--color-apple-card);
+    --border: rgba(0, 0, 0, 0.05);
+  }
+
+  :root.dark {
+    --bg: #000000;
+    --text: var(--color-apple-text-dark);
+    --card: var(--color-apple-card-dark);
+    --border: rgba(255, 255, 255, 0.1);
+  }
+
+  body {
+    @apply bg-[var(--bg)] text-[var(--text)] antialiased transition-colors duration-500 overflow-x-hidden relative;
+    font-family: var(--font-sans);
+  }
+
+  /* Glassmorphism utility classes */
+  .glass {
+    @apply bg-[var(--card)] backdrop-blur-2xl border border-[var(--border)];
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.6), 0 8px 32px rgba(0, 0, 0, 0.04);
+  }
+
+  :root.dark .glass {
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .glass-panel {
+    @apply bg-[var(--card)] backdrop-blur-2xl border border-[var(--border)] rounded-[2.5rem] transition-all duration-500;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.6), 0 8px 32px rgba(0, 0, 0, 0.04);
+  }
+
+  :root.dark .glass-panel {
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .glass-panel:hover {
+    @apply -translate-y-1;
+    box-shadow: 0 16px 64px rgba(0, 0, 0, 0.08);
+  }
+
+  :root.dark .glass-panel:hover {
+    box-shadow: 0 16px 64px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Link hover effect */
+  a {
+    @apply transition-colors duration-300;
+  }
+
+  /* Text Gradients */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-[var(--text)] to-gray-400 dark:to-gray-500;
+  }
+
+  @keyframes blob {
+    0% {
+      transform: translate(0px, 0px) scale(1);
+    }
+
+    33% {
+      transform: translate(30px, -50px) scale(1.1);
+    }
+
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+  }
+
+  .animate-blob {
+    animation: blob 15s infinite alternate ease-in-out;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+
+  /* Shiki Code Blocks Dark Mode Fix */
+  :root.dark .astro-code {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+  }
+
+  :root.dark .astro-code span {
+    color: var(--shiki-dark) !important;
+  }
+}
