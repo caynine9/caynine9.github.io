@@ -62,7 +62,7 @@
     <!-- Centered Links (Desktop) -->
     <div class="hidden sm:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center space-x-10">
       <a href={currentLang === 'id' ? '/id' : '/'} class="text-[14px] font-medium tracking-tight transition-opacity hover:opacity-100 opacity-70">{currentLang === 'id' ? 'Beranda' : 'Home'}</a>
-      <a href={currentLang === 'id' ? '/id/blog' : '/blog'} class="text-[14px] font-medium tracking-tight transition-opacity hover:opacity-100 opacity-70">Blog</a>
+      <a href={currentLang === 'id' ? '/id/blog' : '/blog'} class="text-[14px] font-medium tracking-tight transition-opacity hover:opacity-100 opacity-70">Logcat</a>
     </div>
     
     <!-- Right Actions: Language & Theme -->
@@ -128,7 +128,7 @@
           class="block px-3 py-3 rounded-xl text-base font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
           on:click={() => isMenuOpen = false}
         >
-          Blog
+          Logcat
         </a>
       </div>
     </div>
