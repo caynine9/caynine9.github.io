@@ -1,0 +1,68 @@
+---
+title: "Cerita Sprint 4 Hari: Bagaimana Saya Melakukan Refactor KMP yang Berisiko Tinggi"
+description: "Aplikasi Android native saya sudah live dan stabil, ketika seorang stakeholder datang dengan permintaan yang familiar: mereka butuh dukungan iOS, dan mereka butuh cepat."
+pubDate: "2026-04-29"
+cover_image: "../../../assets/kmp-refactor-cover.jpg"
+lang: "id"
+---
+
+import { Image } from 'astro:assets';
+import img1 from '../../../assets/kmp-refactor-image1.png';
+import img2 from '../../../assets/kmp-refactor-image2.png';
+
+Di dunia startup, ritme kerja sering kali diibaratkan seperti balapan Formula 1. Semuanya berjalan sangat cepat, dan keputusan harus diambil dalam sekejap mata.
+
+Baru-baru ini, saya berada dalam salah satu skenario "manfaatkan momen" tersebut. Aplikasi Android native saya sudah live dan stabil, ketika seorang stakeholder datang dengan permintaan yang familiar: **mereka butuh dukungan iOS, dan mereka butuh cepat**. Alih-alih panik, saya melihat ini sebagai kesempatan untuk mentransisikan proyek ke **Kotlin Multiplatform (KMP)**.
+
+<Image 
+  src={img1} 
+  alt="Jembatan antara logo Android dan Apple yang merepresentasikan KMP" 
+  class="rounded-3xl shadow-2xl border border-white/10 my-10 mx-auto"
+  width={600}
+/>
+
+Saya sudah mendalami KMP selama beberapa bulan sebelum ini, dan bagi saya ini sepertinya bisa menjadi cara yang bagus untuk "terjun langsung ke lapangan".
+
+### Persiapan: Penentuan Cakupan dan Penyelarasan
+
+Sebelum satu baris kode pun diubah, saya menyadari bahwa pekerjaan terpenting justru terjadi di luar IDE. Dalam lingkungan yang serba cepat, kamu harus segera menyelaraskan visimu dengan para stakeholder. Saya menghabiskan waktu untuk mendefinisikan dengan tepat apa saja yang perlu dipindahkan dan mengelola ekspektasi terkait siklus pengembangan.
+
+Tujuannya bukan untuk memindahkan seluruh UI, melainkan mengisolasi logika bisnis utama agar bisa berada di dalam modul bersama (*shared module*).
+
+Kejelasan ini mencegah terjadinya "*scope creep*" (pelebaran cakupan) yang biasanya membunuh sprint-sprint pendek.
+
+### Menjadi Detektif: Memahami Alur
+
+Setelah cakupan ditetapkan, saya harus menjadi detektif di dalam basis kode saya sendiri. Saya menghabiskan waktu memetakan aliran data dari API dan database hingga ke lapisan UI. Saya harus mengidentifikasi setiap dependensi spesifik platform—seperti `SharedPreferences` atau panggilan `Context` khusus Android. Bagian-bagian inilah yang nantinya perlu diabstraksi menggunakan mekanisme `expect/actual` dari KMP.
+
+### Senjata Rahasia: Perencanaan Berbasis AI
+
+Faktor "X" sebenarnya yang membuat lini masa 4 hari ini berhasil adalah bagaimana saya mengintegrasikan AI ke dalam alur kerja. Alih-alih hanya meminta AI menulis kode, saya menggunakannya dalam "Plan Mode" untuk melakukan iterasi pada strategi refactor sebelum eksekusi. Dengan mendefinisikan spek teknis lebih awal, saya menghemat berjam-jam potensi sakit kepala.
+
+Saya menggunakan AI untuk membantu memetakan batas-batas modul dan kemudian mengandalkan model yang lebih hemat biaya untuk menangani pekerjaan *boilerplate* yang repetitif setelah fondasi arsitekturnya solid.
+
+Mengingat bagaimana model penetapan harga langganan AI baru saja berubah (contoh untuk GitHub Copilot, lihat [di sini](https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/), dan [di sini](https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing#model-multipliers-for-annual-copilot-pro-and-copilot-pro-subscribers)), ini bisa menjadi cara paling efisien bagi kamu untuk mengurangi penggunaan token tanpa mengorbankan kualitas output.
+
+### Sprint 4 Hari
+
+Sprint itu sendiri adalah rentetan eksekusi yang sangat fokus. Hari pertama didedikasikan sepenuhnya untuk infrastruktur: Mengonfigurasi `build.gradle.kts` dan menyiapkan folder `commonMain`. Pada hari kedua, fokus beralih ke lapisan data, mengganti jaringan khusus Android dengan **Ktor**.
+
+Hari ketiga adalah yang paling intens, karena saya memigrasikan logika bisnis dan repositori ke modul bersama, sambil berhati-hati mengabstraksi fungsi-fungsi spesifik platform. Akhirnya, pada hari keempat, saya mengintegrasikan framework bersama tersebut ke dalam Xcode. Melihat logika berjalan di layar SwiftUI sederhana untuk pertama kalinya adalah validasi puncak dari pendekatan KMP ini.
+
+<Image 
+  src={img2} 
+  alt="Detail implementasi KMP" 
+  class="rounded-3xl shadow-2xl border border-white/10 my-10 mx-auto"
+  width={800}
+/>
+
+### Refleksi Perjalanan
+Melihat ke belakang, transisi ini mengajarkan saya bahwa refactoring yang sukses bukan tentang kecepatan mengetik, melainkan tentang perencanaan. Jika kamu mencoba ini, prioritaskan library "KMP-First" seperti **Koin** untuk *dependency injection* atau **Ktor** untuk *networking client*.
+
+Dan juga, jangan takut untuk melakukan modularisasi lebih awal; memisahkan logika data, domain, dan fitur akan menyelamatkanmu dari modul bersama yang berantakan.
+
+Yang paling penting, ingatlah untuk menangani `Coroutines` dengan hati-hati. *Dispatcher* Android tidak selalu berperilaku sama di iOS, jadi menggunakan pembungkus yang bersih untuk `async/await` milik Swift sangat penting untuk hasil akhir yang profesional.
+
+Refactoring ke KMP adalah sebuah tantangan, tetapi di pasar yang bergerak cepat, ini adalah salah satu cara terbaik untuk memastikan aplikasi kamu siap menghadapi apa pun yang terjadi selanjutnya.
+
+— Muhammad Tantowi Jauhari
