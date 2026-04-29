@@ -27,13 +27,13 @@ I've been delving deep into KMP for several months before this, and to me this s
 
 Before a single line of code was changed, I realized that the most important work happened outside the IDE. In a rapid-fire environment, you have to align your vision with the stakeholders immediately. I spent time defining exactly what needed to be moved and managing expectations regarding the development cycle. 
 
-It wasn't about porting the entire UI, but rather it was about isolating the core business logic so it could live in a shared module.
-
 This clarity prevented the "scope creep" that usually kills short sprints.
 
 ### Playing Detective: Understanding the Flow
 
 Once the scope was set, I had to become a detective within my own codebase. I spent time mapping the data flow from the API and database all the way to the UI layer. I had to identify every platform-specific dependency. For example, stuff like `SharedPreferences` or Android-specific `Context` calls. These were the parts that would eventually need to be abstracted using KMP’s `expect/actual` mechanism.
+
+It wasn't about porting the entire UI, but rather it was about isolating the core business logic so it could live in a shared module.
 
 ### The Secret Weapon: AI-Driven Planning
 
@@ -54,6 +54,7 @@ The third day was the most intense, as I migrated the business logic and reposit
   alt="KMP implementation details" 
   class="rounded-3xl shadow-2xl border border-white/10 my-10 mx-auto"
   width={800}
+  height={400}
 />
 
 ### Reflections for the Road

@@ -12,7 +12,7 @@ import img2 from '../../../assets/kmp-refactor-image2.png';
 
 Di dunia startup, ritme kerja sering kali diibaratkan seperti balapan Formula 1. Semuanya berjalan sangat cepat, dan keputusan harus diambil dalam sekejap mata.
 
-Baru-baru ini, saya berada dalam salah satu skenario "manfaatkan momen" tersebut. Aplikasi Android native saya sudah live dan stabil, ketika seorang stakeholder datang dengan permintaan yang familiar: **mereka butuh dukungan iOS, dan mereka butuh cepat**. Alih-alih panik, saya melihat ini sebagai kesempatan untuk mentransisikan proyek ke **Kotlin Multiplatform (KMP)**.
+Baru-baru ini, startup tempat saya bekerja berada dalam salah satu skenario "memanfaatkan momen" tersebut. Aplikasi Android native yang saya bangun sudah live dan stabil, ketika seorang stakeholder datang dengan permintaan yang familiar: **client butuh dukungan iOS, dan mereka butuh cepat**. Alih-alih panik, saya melihat ini sebagai kesempatan untuk mentransisikan proyek ke **Kotlin Multiplatform (KMP)**.
 
 <Image 
   src={img1} 
@@ -25,9 +25,9 @@ Saya sudah mendalami KMP selama beberapa bulan sebelum ini, dan bagi saya ini se
 
 ### Persiapan: Penentuan Cakupan dan Penyelarasan
 
-Sebelum satu baris kode pun diubah, saya menyadari bahwa pekerjaan terpenting justru terjadi di luar IDE. Dalam lingkungan yang serba cepat, kamu harus segera menyelaraskan visimu dengan para stakeholder. Saya menghabiskan waktu untuk mendefinisikan dengan tepat apa saja yang perlu dipindahkan dan mengelola ekspektasi terkait siklus pengembangan.
+Sebelum satu baris kode pun diubah, saya menyadari bahwa pekerjaan terpenting justru terjadi di luar IDE. 
 
-Tujuannya bukan untuk memindahkan seluruh UI, melainkan mengisolasi logika bisnis utama agar bisa berada di dalam modul bersama (*shared module*).
+Dalam lingkungan yang serba cepat, kamu harus segera menyelaraskan visimu dengan para stakeholder. Saya menghabiskan waktu untuk mendefinisikan dengan tepat apa saja yang perlu dipindahkan dan mengelola ekspektasi terkait siklus pengembangan.
 
 Kejelasan ini mencegah terjadinya "*scope creep*" (pelebaran cakupan) yang biasanya membunuh sprint-sprint pendek.
 
@@ -35,9 +35,11 @@ Kejelasan ini mencegah terjadinya "*scope creep*" (pelebaran cakupan) yang biasa
 
 Setelah cakupan ditetapkan, saya harus menjadi detektif di dalam basis kode saya sendiri. Saya menghabiskan waktu memetakan aliran data dari API dan database hingga ke lapisan UI. Saya harus mengidentifikasi setiap dependensi spesifik platform—seperti `SharedPreferences` atau panggilan `Context` khusus Android. Bagian-bagian inilah yang nantinya perlu diabstraksi menggunakan mekanisme `expect/actual` dari KMP.
 
+Tujuannya bukan untuk memindahkan seluruh UI, melainkan mengisolasi logika bisnis utama agar bisa berada di dalam modul bersama (*shared module*).
+
 ### Senjata Rahasia: Perencanaan Berbasis AI
 
-Faktor "X" sebenarnya yang membuat lini masa 4 hari ini berhasil adalah bagaimana saya mengintegrasikan AI ke dalam alur kerja. Alih-alih hanya meminta AI menulis kode, saya menggunakannya dalam "Plan Mode" untuk melakukan iterasi pada strategi refactor sebelum eksekusi. Dengan mendefinisikan spek teknis lebih awal, saya menghemat berjam-jam potensi sakit kepala.
+Faktor "X" sebenarnya yang membuat *timeline* 4 hari ini berhasil adalah bagaimana saya mengintegrasikan AI ke dalam alur kerja. Alih-alih hanya meminta AI menulis kode, saya menggunakannya dalam "Plan Mode" untuk melakukan iterasi pada strategi refactor sebelum eksekusi. Dengan mendefinisikan spek teknis lebih awal, saya menghemat berjam-jam potensi sakit kepala.
 
 Saya menggunakan AI untuk membantu memetakan batas-batas modul dan kemudian mengandalkan model yang lebih hemat biaya untuk menangani pekerjaan *boilerplate* yang repetitif setelah fondasi arsitekturnya solid.
 
@@ -45,7 +47,9 @@ Mengingat bagaimana model penetapan harga langganan AI baru saja berubah (contoh
 
 ### Sprint 4 Hari
 
-Sprint itu sendiri adalah rentetan eksekusi yang sangat fokus. Hari pertama didedikasikan sepenuhnya untuk infrastruktur: Mengonfigurasi `build.gradle.kts` dan menyiapkan folder `commonMain`. Pada hari kedua, fokus beralih ke lapisan data, mengganti jaringan khusus Android dengan **Ktor**.
+Sprint itu sendiri adalah rentetan eksekusi yang sangat fokus. 
+
+Hari pertama didedikasikan sepenuhnya untuk infrastruktur: Mengonfigurasi `build.gradle.kts` dan menyiapkan folder `commonMain`. Pada hari kedua, fokus beralih ke lapisan data, mengganti jaringan khusus Android dengan **Ktor**.
 
 Hari ketiga adalah yang paling intens, karena saya memigrasikan logika bisnis dan repositori ke modul bersama, sambil berhati-hati mengabstraksi fungsi-fungsi spesifik platform. Akhirnya, pada hari keempat, saya mengintegrasikan framework bersama tersebut ke dalam Xcode. Melihat logika berjalan di layar SwiftUI sederhana untuk pertama kalinya adalah validasi puncak dari pendekatan KMP ini.
 
@@ -54,6 +58,7 @@ Hari ketiga adalah yang paling intens, karena saya memigrasikan logika bisnis da
   alt="Detail implementasi KMP" 
   class="rounded-3xl shadow-2xl border border-white/10 my-10 mx-auto"
   width={800}
+  height={400}
 />
 
 ### Refleksi Perjalanan
