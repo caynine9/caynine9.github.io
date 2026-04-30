@@ -1,5 +1,5 @@
 ---
-title: "Sprint 4 Hari: Menavigasi Refactor KMP yang High-Stakes"
+title: "The 4 Day Sprint: Menavigasi Refactor KMP yang High-Stakes"
 description: "Aplikasi Android native saya sudah live dan stabil, sampai seorang stakeholder datang dengan permintaan yang familiar: mereka butuh dukungan iOS, dan butuh secepatnya."
 pubDate: "2026-04-29"
 cover_image: "../../../assets/kmp-refactor-cover.jpg"
@@ -12,7 +12,7 @@ import img2 from '../../../assets/kmp-refactor-image2.png';
 
 Dalam dunia startup, ritme kerja sering kali diibaratkan seperti balapan Formula 1. Segalanya bergerak sangat cepat, dan keputusan harus diambil dalam sekejap mata.
 
-Baru-baru ini, saya berada di salah satu skenario "seize the moment" tersebut. Aplikasi Android native saya sudah live dan stabil, ketika seorang *stakeholder* utama di perusahaan datang dengan permintaan yang sudah bisa ditebak: **klien kita butuh dukungan iOS, dan mereka butuh secepatnya.** Bukannya panik, saya justru melihat ini sebagai peluang emas untuk mentransisikan proyek ke **Kotlin Multiplatform (KMP)**.
+Baru-baru ini, saya berada di salah satu skenario "seize the moment" tersebut. Aplikasi Android native saya sudah live dan stabil, ketika seorang *stakeholder* utama di perusahaan tempat saya bekerja datang dengan permintaan yang sudah bisa ditebak: **klien kita butuh dukungan iOS, dan mereka butuh secepatnya.** Bukannya panik, saya justru melihat ini sebagai peluang emas untuk mentransisikan proyek ke **Kotlin Multiplatform (KMP)**.
 
 <Image 
   src={img1} 
@@ -23,9 +23,9 @@ Baru-baru ini, saya berada di salah satu skenario "seize the moment" tersebut. A
 
 Kebetulan saya sudah mendalami KMP selama beberapa bulan terakhir, jadi momen ini terasa seperti waktu yang tepat untuk menguji kemampuan KMP di medan tempur yang sesungguhnya.
 
-### Menyiapkan Strategi: Scoping dan Penyelarasan
+### Scoping dan Penyelarasan
 
-Sebelum satu baris kode pun diubah, saya menyadari bahwa pekerjaan terpenting justru terjadi di luar IDE. Dalam lingkungan yang bergerak cepat, kamu harus menyelaraskan visi dengan para *stakeholder* saat itu juga.
+Sebelum satu baris kode pun diubah, saya menyadari bahwa pekerjaan terpenting justru terjadi di luar IDE. Dalam lingkungan yang bergerak cepat, kita harus menyelaraskan visi dengan para *stakeholder* saat itu juga.
 
 Saya meluangkan waktu untuk mendefinisikan dengan tepat apa saja yang perlu dipindahkan dan mengelola ekspektasi mengenai siklus pengembangannya. Kejelasan di awal ini sangat krusial untuk mencegah "scope creep" yang biasanya menjadi pembunuh utama *sprint* pendek.
 
@@ -123,7 +123,7 @@ class ProfileViewModel: ObservableObject {
 }
 ```
 
-Dan selesai. Aplikasi Android native kamu kini sudah berjalan di iOS juga.
+Dan selesai. Aplikasi Android native kita kini sudah bisa berjalan di iOS juga.
 <Image 
   src={img2} 
   alt="KMP implementation details" 
@@ -131,18 +131,24 @@ Dan selesai. Aplikasi Android native kamu kini sudah berjalan di iOS juga.
   width={500}
 />
 
-### Faktor X: Perencanaan Berbasis AI
+### The X Factor: AI-Assisted Planning
 "Faktor X" sebenarnya yang membuat timeline 4 hari ini berhasil adalah bagaimana saya mengintegrasikan AI ke dalam alur kerja. Alih-alih hanya menyuruh AI menulis kode, saya menggunakannya dalam "Plan Mode" untuk mengiterasi strategi refactor sebelum eksekusi dimulai. Dengan mendefinisikan spesifikasi teknis lebih awal, saya menghemat berjam-jam potensi masalah.
 
-Saya menggunakan AI untuk membantu memetakan batas-batas modul dan kemudian mengandalkan model yang lebih hemat biaya untuk menangani pekerjaan boilerplate yang repetitif setelah fondasi arsitekturnya solid.
+Saya menggunakan AI untuk membantu memetakan batas-batas modul dan kemudian mengandalkan model yang lebih hemat biaya untuk menangani pekerjaan boilerplate yang repetitif setelah fondasi arsitekturnya solid. Contohnya untuk hal yang perlu pemikiran mendalam seperti strategi refactoring saya akan menggunakan Claude Opus 4.7, sedangkan untuk hal yang repetitif seperti membuat kode boilerplate saya akan menggunakan AI yang lebih hemat biaya seperti Claude Haiku 4.5.
 
 Mengingat model harga langganan AI yang baru saja berubah (contohnya GitHub Copilot, lihat di [sini](https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/) dan di [sini](https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing#model-multipliers-for-annual-copilot-pro-and-copilot-pro-subscribers)), ini bisa menjadi cara paling efisien biaya untuk mengurangi penggunaan token tanpa mengorbankan kualitas output.
 
 ### Refleksi Perjalanan
-Melihat ke belakang, transisi ini mengajarkan saya bahwa refactoring yang sukses bukan tentang seberapa cepat kamu mengetik, melainkan tentang perencanaan. Jika kamu ingin mencoba ini, prioritaskan library yang "KMP-First" seperti **Koin** untuk dependency injection atau **Ktor** untuk networking.
+Setelah merefleksikan proses ini, saya menyadari bahwa refactoring yang sukses bukan sekadar soal adu cepat mengejar output, melainkan tentang kematangan rencana dari task tersebut dan *handling edge cases* dari jauh-jauh hari sebelum mulai inisiasi proyek. 
+
+Membangun aplikasi mungkin terasa makin mudah dengan bantuan AI dalam penulisan kode, namun ada satu hal yang belum bisa disentuh teknologi: *ambient context* atau konteks manusiawi yang melatarbelakangi sebuah sistem. Inilah alasan mengapa perencanaan strategis harus tetap datang dari kita. 
+
+Di tulisan berikutnya, saya akan mengulas lebih dalam mengapa *software engineering is not dead* dan bagaimana peran vital manusia dengan mindset *overthinker* tetap bertahan di tengah kecerdasan AI yang terus berevolusi.
+
+Jika kalian ingin mencoba ini, prioritaskan library yang "KMP-First" seperti **Koin** untuk dependency injection atau **Ktor** untuk networking.
 
 Yang terpenting, ingatlah untuk menangani `Coroutines` dengan hati-hati. Dispatcher Android tidak selalu berperilaku sama di iOS, jadi menggunakan wrapper yang bersih untuk `async/await` Swift sangat penting untuk hasil akhir yang profesional.
 
-Selain itu, jangan takut untuk melakukan modularisasi lebih awal; memisahkan logika data, domain, dan fitur akan menghindarkan kamu dari "shared module" yang berantakan di kemudian hari.
+Selain itu, jangan takut untuk melakukan modularisasi lebih awal; memisahkan logika data, domain, dan fitur akan menghindarkan kalian dari "shared module" yang berantakan di kemudian hari.
 
 — Muhammad Tantowi Jauhari - [LinkedIn](https://www.linkedin.com/in/mtantowij/) - [Whatsapp](https://wa.me/628115114383)

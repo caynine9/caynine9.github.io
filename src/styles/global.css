@@ -40,6 +40,7 @@
     --text: var(--color-apple-text);
     --card: var(--color-apple-card);
     --border: rgba(0, 0, 0, 0.05);
+    --hr-border: rgba(0, 0, 0, 0.15);
   }
 
   :root.dark {
@@ -47,6 +48,7 @@
     --text: var(--color-apple-text-dark);
     --card: var(--color-apple-card-dark);
     --border: rgba(255, 255, 255, 0.1);
+    --hr-border: rgba(255, 255, 255, 0.25);
   }
 
   body {

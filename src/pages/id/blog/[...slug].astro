@@ -1,28 +1,28 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
-import { render } from 'astro:content';
-import { Image } from 'astro:assets';
-import BaseHead from '../../../components/BaseHead.astro';
-import Header from '../../../components/Header.svelte';
-import Footer from '../../../components/Footer.svelte';
+import { type CollectionEntry, getCollection } from "astro:content";
+import { render } from "astro:content";
+import { Image } from "astro:assets";
+import BaseHead from "../../../components/BaseHead.astro";
+import Header from "../../../components/Header.svelte";
+import Footer from "../../../components/Footer.svelte";
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-  const idPosts = posts.filter(post => post.id.startsWith('id/'));
+	const posts = await getCollection("blog");
+	const idPosts = posts.filter((post) => post.id.startsWith("id/"));
 	return idPosts.map((post) => ({
-		params: { slug: post.id.replace('id/', '') },
+		params: { slug: post.id.replace("id/", "") },
 		props: post,
 	}));
 }
-type Props = CollectionEntry<'blog'>;
+type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
 const { Content } = await render(post);
 
-const formattedDate = new Date(post.data.pubDate).toLocaleDateString('id-id', {
-	year: 'numeric',
-	month: 'short',
-	day: 'numeric',
+const formattedDate = new Date(post.data.pubDate).toLocaleDateString("id-id", {
+	year: "numeric",
+	month: "short",
+	day: "numeric",
 });
 ---
 
@@ -35,33 +35,71 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('id-id', {
 		<Header client:load currentPath={Astro.url.pathname} />
 		<main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24">
 			<div class="mb-12">
-				<a href="/id/blog" class="inline-flex items-center gap-2 text-sm font-medium opacity-50 hover:opacity-100 transition-opacity group">
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:-translate-x-1 transition-transform"><path d="m15 18-6-6 6-6"/></svg>
+				<a
+					href="/id/blog"
+					class="inline-flex items-center gap-2 text-sm font-medium opacity-50 hover:opacity-100 transition-opacity group"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="16"
+						height="16"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2.5"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						class="group-hover:-translate-x-1 transition-transform"
+						><path d="m15 18-6-6 6-6"></path></svg
+					>
 					Kembali ke Blog
 				</a>
 			</div>
 			<article class="prose prose-lg dark:prose-invert max-w-none">
-				{post.data.cover_image && (
-					<div class="mb-8 rounded-3xl overflow-hidden glass shadow-lg">
-						<Image src={post.data.cover_image} alt={post.data.title} class="w-full h-auto object-cover max-h-[500px]" />
-					</div>
-				)}
-				
+				{
+					post.data.cover_image && (
+						<div class="mb-8 rounded-3xl overflow-hidden glass shadow-lg">
+							<Image
+								src={post.data.cover_image}
+								alt={post.data.title}
+								class="w-full h-auto object-cover max-h-[500px]"
+							/>
+						</div>
+					)
+				}
+
 				<header class="mb-10 text-center">
-					<div class="text-sm font-medium opacity-60 mb-3 tracking-widest uppercase flex flex-wrap items-center justify-center gap-2">
+					<div
+						class="text-sm font-medium opacity-60 mb-3 tracking-widest uppercase flex flex-wrap items-center justify-center gap-2"
+					>
 						<span>{formattedDate}</span>
 						<span>&bull;</span>
 						<span>{post.data.author}</span>
 					</div>
-					<h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">{post.data.title}</h1>
-					{post.data.updatedDate && (
-						<div class="italic text-sm opacity-60">
-							Terakhir diperbarui pada <time>{new Date(post.data.updatedDate).toLocaleDateString('id-id', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
-						</div>
-					)}
-					<hr class="mt-8 border-gray-200 dark:border-gray-800" />
+					<h1
+						class="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4"
+					>
+						{post.data.title}
+					</h1>
+					{
+						post.data.updatedDate && (
+							<div class="italic text-sm opacity-60">
+								Terakhir diperbarui pada{" "}
+								<time>
+									{new Date(
+										post.data.updatedDate,
+									).toLocaleDateString("id-id", {
+										year: "numeric",
+										month: "short",
+										day: "numeric",
+									})}
+								</time>
+							</div>
+						)
+					}
+					<hr class="mt-8 border-0 border-t !border-[var(--hr-border)]" />
 				</header>
-				
+
 				<div class="blog-content">
 					<Content />
 				</div>
@@ -72,14 +110,21 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('id-id', {
 </html>
 
 <style is:global>
-	.blog-content h1, .blog-content h2, .blog-content h3, .blog-content h4 {
+	.blog-content h1,
+	.blog-content h2,
+	.blog-content h3,
+	.blog-content h4 {
 		font-weight: 700;
 		margin-top: 2em;
 		margin-bottom: 0.5em;
 		letter-spacing: -0.025em;
 	}
-	.blog-content h2 { font-size: 1.875rem; }
-	.blog-content h3 { font-size: 1.5rem; }
+	.blog-content h2 {
+		font-size: 1.875rem;
+	}
+	.blog-content h3 {
+		font-size: 1.5rem;
+	}
 	.blog-content p {
 		margin-bottom: 1.5em;
 		line-height: 1.75;
@@ -113,7 +158,9 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('id-id', {
 		border: 1px solid var(--border);
 	}
 	.blog-content code {
-		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+		font-family:
+			ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+			"Liberation Mono", "Courier New", monospace;
 	}
 	.blog-content :not(pre) > code {
 		background: rgba(0, 0, 0, 0.05);
