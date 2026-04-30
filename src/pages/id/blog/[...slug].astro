@@ -48,8 +48,10 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('id-id', {
 				)}
 				
 				<header class="mb-10 text-center">
-					<div class="text-sm font-medium opacity-60 mb-3 tracking-widest uppercase">
-						{formattedDate}
+					<div class="text-sm font-medium opacity-60 mb-3 tracking-widest uppercase flex flex-wrap items-center justify-center gap-2">
+						<span>{formattedDate}</span>
+						<span>&bull;</span>
+						<span>{post.data.author}</span>
 					</div>
 					<h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">{post.data.title}</h1>
 					{post.data.updatedDate && (

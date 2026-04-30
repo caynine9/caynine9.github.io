@@ -15,6 +15,7 @@ const blog = defineCollection({
 			updatedDate: z.coerce.date().optional(),
 			cover_image: z.optional(image()),
 			lang: z.enum(['id', 'en']).default('id'),
+			author: z.string().default('Muhammad Tantowi Jauhari'),
 		}),
 });
 
