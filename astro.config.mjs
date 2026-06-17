@@ -9,7 +9,7 @@ import svelte from '@astrojs/svelte';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://caynine9.github.io',
+  site: 'https://tantowi.dev',
   integrations: [mdx(), sitemap(), svelte()],
 
   i18n: {
