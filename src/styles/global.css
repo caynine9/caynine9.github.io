@@ -27,11 +27,12 @@
 @theme {
   --font-sans: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --color-apple-bg: #f5f5f7;
-  --color-apple-card: rgba(245, 245, 247, 0.5);
-  --color-apple-card-dark: rgba(28, 28, 30, 0.7);
+  --color-apple-card: rgba(255, 255, 255, 0.72);
+  --color-apple-card-dark: rgba(28, 28, 30, 0.72);
   --color-apple-text: #1d1d1f;
   --color-apple-text-dark: #f5f5f7;
-  --color-apple-link: #0066cc;
+  --color-apple-link: #0071e3;
+  --color-apple-subtle: #86868b;
 }
 
 @layer base {
@@ -39,92 +40,337 @@
     --bg: var(--color-apple-bg);
     --text: var(--color-apple-text);
     --card: var(--color-apple-card);
-    --border: rgba(0, 0, 0, 0.05);
-    --hr-border: rgba(0, 0, 0, 0.15);
+    --border: rgba(0, 0, 0, 0.06);
+    --hr-border: rgba(0, 0, 0, 0.12);
+    --subtle: var(--color-apple-subtle);
+    --accent: var(--color-apple-link);
   }
 
   :root.dark {
     --bg: #000000;
     --text: var(--color-apple-text-dark);
     --card: var(--color-apple-card-dark);
-    --border: rgba(255, 255, 255, 0.1);
-    --hr-border: rgba(255, 255, 255, 0.25);
+    --border: rgba(255, 255, 255, 0.08);
+    --hr-border: rgba(255, 255, 255, 0.15);
+    --subtle: #86868b;
+    --accent: #2997ff;
   }
 
   body {
     @apply bg-[var(--bg)] text-[var(--text)] antialiased transition-colors duration-500 overflow-x-hidden relative;
     font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Glassmorphism utility classes */
-  .glass {
-    @apply bg-[var(--card)] backdrop-blur-2xl border border-[var(--border)];
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.6), 0 8px 32px rgba(0, 0, 0, 0.04);
+}
+
+/* ============================================
+   CARD SYSTEM — No backdrop-blur for performance
+   ============================================ */
+
+.glass {
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: background-color 0.5s ease, border-color 0.5s ease;
+}
+
+.card-elevated {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              background-color 0.5s ease, border-color 0.5s ease;
+}
+
+.card-elevated:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+:root.dark .card-elevated:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   TYPOGRAPHY UTILITIES
+   ============================================ */
+
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  background-image: linear-gradient(to bottom right, var(--text), var(--subtle));
+}
+
+.text-subtle {
+  color: var(--subtle);
+}
+
+.section-overline {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: 1rem;
+  color: var(--accent);
+}
+
+.section-title {
+  font-size: clamp(2.25rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.5rem;
+}
+
+.section-subtitle {
+  font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+  line-height: 1.625;
+  max-width: 42rem;
+  color: var(--subtle);
+}
+
+/* ============================================
+   BUTTON SYSTEM (pure CSS — no @apply)
+   ============================================ */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(0, 113, 227, 0.35);
+  filter: brightness(1.1);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+  background: var(--text);
+  color: var(--bg);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+}
+
+:root.dark .btn-secondary:hover {
+  box-shadow: 0 6px 24px rgba(255, 255, 255, 0.1);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border);
+  color: var(--text);
+  background: transparent;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-ghost:hover {
+  background: var(--card);
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   TAG / PILL SYSTEM
+   ============================================ */
+
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.375rem 0.875rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  background: rgba(0, 113, 227, 0.08);
+  color: var(--accent);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.tag-pill:hover {
+  transform: scale(1.05);
+  background: rgba(0, 113, 227, 0.14);
+}
+
+.tag-pill-neutral {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.375rem 0.875rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tag-pill-neutral:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+:root.dark .tag-pill-neutral:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   SCROLL REVEAL ANIMATION (performant)
+   ============================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
   }
-
-  :root.dark .glass {
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 8px 32px rgba(0, 0, 0, 0.3);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
 
-  .glass-panel {
-    @apply bg-[var(--card)] backdrop-blur-2xl border border-[var(--border)] rounded-[2.5rem] transition-all duration-500;
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.6), 0 8px 32px rgba(0, 0, 0, 0.04);
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children delays */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ============================================
+   LINK STYLES
+   ============================================ */
+
+a {
+  transition: color 0.3s ease;
+}
+
+/* ============================================
+   AMBIENT BACKGROUND — Static, no animation
+   ============================================ */
+
+.ambient-glow {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 10%, rgba(0, 113, 227, 0.06), transparent),
+    radial-gradient(ellipse 50% 40% at 80% 60%, rgba(88, 86, 214, 0.04), transparent);
+}
+
+:root.dark .ambient-glow {
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 10%, rgba(41, 151, 255, 0.06), transparent),
+    radial-gradient(ellipse 50% 40% at 80% 60%, rgba(88, 86, 214, 0.05), transparent);
+}
+
+/* ============================================
+   DIVIDER
+   ============================================ */
+
+.section-divider {
+  border-top: 1px solid var(--border);
+}
+
+/* ============================================
+   TIMELINE
+   ============================================ */
+
+.timeline-line {
+  position: absolute;
+  left: 7px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+}
+
+.timeline-dot {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 9999px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--border);
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
-
-  :root.dark .glass-panel {
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 8px 32px rgba(0, 0, 0, 0.3);
+  .card-elevated {
+    transition: none;
   }
-
-  .glass-panel:hover {
-    @apply -translate-y-1;
-    box-shadow: 0 16px 64px rgba(0, 0, 0, 0.08);
+  .card-elevated:hover {
+    transform: none;
   }
+}
 
-  :root.dark .glass-panel:hover {
-    box-shadow: 0 16px 64px rgba(0, 0, 0, 0.4);
-  }
+/* ============================================
+   SHIKI CODE BLOCKS
+   ============================================ */
 
-  /* Link hover effect */
-  a {
-    @apply transition-colors duration-300;
-  }
-
-  /* Text Gradients */
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-br from-[var(--text)] to-gray-400 dark:to-gray-500 py-1;
-  }
-
-  @keyframes blob {
-    0% {
-      transform: translate(0px, 0px) scale(1);
-    }
-
-    33% {
-      transform: translate(30px, -50px) scale(1.1);
-    }
-
-    66% {
-      transform: translate(-20px, 20px) scale(0.9);
-    }
-
-    100% {
-      transform: translate(0px, 0px) scale(1);
-    }
-  }
-
-  .animate-blob {
-    animation: blob 15s infinite alternate ease-in-out;
-  }
-
-  .animation-delay-2000 {
-    animation-delay: 2s;
-  }
-
-  .animation-delay-4000 {
-    animation-delay: 4s;
-  }
-
-  /* Shiki Code Blocks Dark Mode Fix */
+@layer base {
   :root.dark .astro-code {
     color: var(--shiki-dark) !important;
     background-color: var(--shiki-dark-bg) !important;

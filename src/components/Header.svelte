@@ -7,6 +7,7 @@
   let theme: "light" | "dark" = "light";
   let isMenuOpen = false;
   let currentLang = "en";
+  let scrolled = false;
 
   $: currentLang = currentPath.startsWith("/id") ? "id" : "en";
 
@@ -14,6 +15,12 @@
     theme = document.documentElement.classList.contains("dark")
       ? "dark"
       : "light";
+
+    const onScroll = () => {
+      scrolled = window.scrollY > 10;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   });
 
   function toggleTheme() {
@@ -43,7 +50,11 @@
   }
 </script>
 
-<header class="sticky top-0 z-50 glass transition-colors duration-500">
+<header
+  class="sticky top-0 z-50 header-base"
+  class:header-scrolled={scrolled}
+  class:header-top={!scrolled}
+>
   <nav
     class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative h-14 flex items-center justify-between"
   >
@@ -97,7 +108,7 @@
     <div class="flex items-center space-x-2 ml-auto">
       <!-- Language Switcher -->
       <div
-        class="flex items-center bg-black/10 dark:bg-white/5 rounded-full p-1 mr-2"
+        class="flex items-center bg-black/5 dark:bg-white/5 rounded-full p-1 mr-2"
       >
         <a
           href={getLanguageUrl("id")}
@@ -169,7 +180,8 @@
   {#if isMenuOpen}
     <div
       transition:slide={{ duration: 300 }}
-      class="sm:hidden glass border-t border-black/5 dark:border-white/5 overflow-hidden"
+      class="sm:hidden border-t overflow-hidden"
+      style="border-color: var(--border); background: var(--card);"
     >
       <div class="px-4 pt-2 pb-6 space-y-1">
         <a
@@ -190,3 +202,28 @@
     </div>
   {/if}
 </header>
+
+<style>
+  .header-base {
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease, -webkit-backdrop-filter 0.3s ease;
+  }
+
+  .header-top {
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+
+  .header-scrolled {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  :global(:root.dark) .header-scrolled {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+</style>

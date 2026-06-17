@@ -2,28 +2,29 @@
   const today = new Date();
 </script>
 
-<footer class="py-10 text-center text-sm opacity-60">
+<footer class="py-16 text-center section-divider">
   <div class="max-w-4xl mx-auto px-4">
-    <div class="mt-4 flex justify-center space-x-6">
+    <div class="flex justify-center space-x-8 mb-8">
       <a
         href="https://linkedin.com/in/mtantowij"
         target="_blank"
-        class="hover:opacity-70 transition-opacity">LinkedIn</a
+        class="text-sm font-medium opacity-50 hover:opacity-100 transition-opacity"
+        >LinkedIn</a
       >
       <a
         href="https://wa.me/628115114383"
         target="_blank"
-        class="hover:opacity-70 transition-opacity">WhatsApp</a
+        class="text-sm font-medium opacity-50 hover:opacity-100 transition-opacity"
+        >WhatsApp</a
       >
       <a
         href="mailto:tantowijauhari16@gmail.com"
-        class="hover:opacity-70 transition-opacity">Email</a
+        class="text-sm font-medium opacity-50 hover:opacity-100 transition-opacity"
+        >Email</a
       >
     </div>
-    <br />
-    <p>
-      &copy; {today.getFullYear()} Muhammad Tantowi Jauhari. All rights reserved.
+    <p class="text-xs opacity-40">
+      &copy; {today.getFullYear()} Muhammad Tantowi Jauhari
     </p>
-    <p>Powered by Astro & Svelte</p>
   </div>
 </footer>
