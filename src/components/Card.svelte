@@ -21,7 +21,7 @@
     {/if}
     <div class="p-6 flex flex-col flex-grow">
       <time class="text-xs font-medium uppercase tracking-wider opacity-60 mb-2">{formattedDate}</time>
-      <h2 class="text-xl font-bold leading-tight mb-3 group-hover:text-blue-500 transition-colors duration-500">{title}</h2>
+      <h2 class="text-xl font-bold leading-tight mb-3 group-hover:text-[var(--accent)] transition-colors duration-500">{title}</h2>
       <p class="text-sm opacity-80 line-clamp-3 mt-auto">{description}</p>
     </div>
   </article>

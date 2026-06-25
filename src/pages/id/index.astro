@@ -135,64 +135,60 @@ const skillCategories = [
 
 		<main class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-10">
 			<!-- ==================== HERO ==================== -->
-			<section class="pt-16 sm:pt-24 pb-24 sm:pb-32">
-				<div class="max-w-3xl mx-auto text-center">
-					<!-- Profile Photo -->
-					<div class="reveal mb-10 flex justify-center">
-						<div class="relative">
+			<section class="pt-20 sm:pt-32 pb-24 sm:pb-32">
+				<div class="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-12 lg:gap-20 items-center">
+					<!-- Copy (Left) -->
+					<div class="order-2 md:order-1">
+						<div class="reveal mb-8">
+							<span class="hero-chip">
+								<span class="w-2 h-2 rounded-full bg-green-500 mr-2 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
+								Tersedia untuk Bekerja
+							</span>
+						</div>
+						
+						<h1
+							class="reveal reveal-delay-1 text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]"
+						>
+							Halo, Saya <br class="hidden md:block"/><span style="color: var(--accent);">Tantowi.</span>
+						</h1>
+						<p
+							class="reveal reveal-delay-2 text-lg sm:text-xl leading-relaxed mb-10 max-w-xl"
+							style="color: var(--subtle);"
+						>
+							Saya membangun pengalaman <strong class="text-[var(--text)] font-semibold">mobile</strong> berkinerja tinggi
+							dan sistem <strong class="text-[var(--text)] font-semibold">backend</strong> yang kokoh.
+						</p>
+
+						<!-- CTA Buttons -->
+						<div
+							class="reveal reveal-delay-3 flex flex-col sm:flex-row items-start sm:items-center gap-4"
+						>
+							<a href="#contact" class="btn-primary">
+								Hubungi Saya
+							</a>
+							<a href="#portfolio" class="btn-ghost">
+								Lihat Portofolio &rarr;
+							</a>
+						</div>
+					</div>
+
+					<!-- Profile Photo (Right) -->
+					<div class="order-1 md:order-2 flex justify-center md:justify-end reveal reveal-delay-2">
+						<div class="relative group">
 							<div
-								class="w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden ring-2 ring-[var(--border)] ring-offset-4 ring-offset-[var(--bg)] shadow-lg"
+								class="w-48 h-48 sm:w-64 sm:h-64 rounded-[2rem] overflow-hidden shadow-2xl transition-transform duration-700 ease-out group-hover:-translate-y-2 group-hover:rotate-1"
 							>
 								<img
 									src="/profile.webp"
 									alt="Muhammad Tantowi Jauhari"
 									class="w-full h-full object-cover"
-									width="128"
-									height="128"
+									width="256"
+									height="256"
 									loading="eager"
 								/>
 							</div>
-							<div
-								class="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-green-500 border-[3px] border-[var(--bg)] shadow-sm"
-								title="Tersedia untuk bekerja"
-							>
-							</div>
+							<div class="absolute -inset-4 bg-gradient-to-tr from-[var(--accent)] to-transparent opacity-20 blur-2xl rounded-full -z-10 group-hover:opacity-40 transition-opacity duration-700"></div>
 						</div>
-					</div>
-
-					<!-- Headline -->
-					<p
-						class="reveal reveal-delay-1 section-overline"
-					>
-						Software Engineer
-					</p>
-					<h1
-						class="reveal reveal-delay-2 text-5xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight mb-8 leading-[1.05]"
-					>
-						Halo, Saya <span style="color: var(--accent);">Tantowi.</span>
-					</h1>
-					<p
-						class="reveal reveal-delay-3 text-lg sm:text-xl leading-relaxed mb-12 max-w-2xl mx-auto"
-						style="color: var(--subtle);"
-					>
-						Saya membangun pengalaman <strong class="text-[var(--text)] font-semibold">mobile</strong> berkinerja tinggi
-						dan sistem <strong class="text-[var(--text)] font-semibold">backend</strong> yang kokoh.
-						Mengubah ide kompleks menjadi solusi digital end-to-end yang mulus.
-					</p>
-
-					<!-- CTA Buttons -->
-					<div
-						class="reveal reveal-delay-4 flex flex-col sm:flex-row items-center justify-center gap-3"
-					>
-						<a href="/id/blog" class="btn-secondary">
-							Baca Blog Saya
-						</a>
-						<a href="#portfolio" class="btn-ghost">
-							Lihat Portofolio
-						</a>
-						<a href="#contact" class="btn-primary">
-							Hubungi Saya
-						</a>
 					</div>
 				</div>
 			</section>
@@ -200,9 +196,9 @@ const skillCategories = [
 			<!-- ==================== EXPERIENCE ==================== -->
 			<section class="py-24 sm:py-32 section-divider">
 				<div class="max-w-3xl mx-auto">
-					<div class="text-center mb-20 reveal">
-						<p class="section-overline">Pengalaman</p>
-						<h2 class="section-title">Perjalanan Profesional</h2>
+					<div class="mb-16 reveal">
+						<h2 class="section-title mb-2">Perjalanan Profesional</h2>
+						<p class="text-lg" style="color: var(--subtle);">Rekam jejak dalam membangun dan merilis produk.</p>
 					</div>
 
 					<div class="relative pl-8">
@@ -213,7 +209,9 @@ const skillCategories = [
 							{experience.map((item, index) => (
 								<div class={`reveal reveal-delay-${Math.min(index + 1, 4)} relative`}>
 									<!-- Timeline Dot -->
-									<div class="timeline-dot absolute -left-8 top-1"></div>
+									<div class="absolute -left-[32px] top-8 w-[14px] h-[14px] rounded-full border-2 border-[var(--accent)] bg-[var(--bg)] flex items-center justify-center translate-x-[0.5px]">
+										<div class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></div>
+									</div>
 
 									<!-- Content -->
 									<div class="card-elevated p-7 sm:p-8">
@@ -260,13 +258,13 @@ const skillCategories = [
 					</p>
 				</div>
 
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 					{projects.map((project, index) => (
-						<div class={`reveal reveal-delay-${Math.min(index + 1, 4)} card-elevated p-7 sm:p-8 flex flex-col h-full relative overflow-hidden group`}>
+						<div class={`reveal reveal-delay-${Math.min(index + 1, 4)} card-elevated p-7 sm:p-8 flex flex-col h-full relative overflow-hidden group ${index === 0 ? 'md:col-span-3' : ''}`}>
 							<!-- Accent top line -->
 							<div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent opacity-40"></div>
 
-							<div class="flex items-center justify-between mb-6">
+							<div class={`flex items-center justify-between mb-6 ${index === 0 ? 'md:mb-10' : ''}`}>
 								<span class="text-xs font-bold" style="color: var(--subtle);">
 									{String(index + 1).padStart(2, '0')}
 								</span>
@@ -284,10 +282,10 @@ const skillCategories = [
 								)}
 							</div>
 
-							<h3 class="text-2xl font-bold mb-3 tracking-tight">
+							<h3 class={`font-bold mb-3 tracking-tight ${index === 0 ? 'text-3xl md:text-4xl' : 'text-2xl'}`}>
 								{project.title}
 							</h3>
-							<p class="text-sm leading-relaxed mb-8 flex-grow" style="color: var(--subtle);">
+							<p class={`leading-relaxed flex-grow ${index === 0 ? 'text-lg md:text-xl max-w-2xl mb-12' : 'text-sm mb-8'}`} style="color: var(--subtle);">
 								{project.description}
 							</p>
 
@@ -305,20 +303,19 @@ const skillCategories = [
 
 			<!-- ==================== SKILLS / TECH STACK ==================== -->
 			<section class="py-24 sm:py-32 section-divider">
-				<div class="text-center mb-16 reveal">
-					<p class="section-overline">Keahlian</p>
-					<h2 class="section-title">Stack Teknologi</h2>
-					<p class="section-subtitle mx-auto">
+				<div class="mb-16 reveal">
+					<h2 class="section-title mb-2">Stack Teknologi</h2>
+					<p class="section-subtitle">
 						Saya memanfaatkan berbagai teknologi untuk membangun
 						aplikasi modern yang scalable di seluruh stack.
 					</p>
 				</div>
 
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+				<div class="grid grid-cols-1 md:grid-cols-5 gap-6">
 					{skillCategories.map((category, index) => (
-						<div class={`reveal reveal-delay-${Math.min(index + 1, 3)} card-elevated p-7 sm:p-8`}>
+						<div class={`reveal reveal-delay-${Math.min(index + 1, 3)} bento-cell p-7 sm:p-8 ${index === 0 ? 'md:col-span-3 bento-cell--accent' : 'md:col-span-2'}`}>
 							<div class="mb-6 flex items-center gap-3">
-								<div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: rgba(0, 113, 227, 0.08); color: var(--accent);">
+								<div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: rgba(var(--accent-rgb), 0.08); color: var(--accent);">
 									<Fragment set:html={category.icon} />
 								</div>
 								<h3 class="text-base font-bold uppercase tracking-wider" style="color: var(--accent);">
@@ -339,21 +336,19 @@ const skillCategories = [
 
 			<!-- ==================== CONTACT ==================== -->
 			<section id="contact" class="py-24 sm:py-32 section-divider">
-				<div class="max-w-2xl mx-auto text-center reveal">
-					<p class="section-overline">Kontak</p>
-					<h2 class="text-4xl sm:text-6xl font-bold tracking-tight mb-6">
+				<div class="reveal text-center max-w-3xl mx-auto">
+					<h2 class="text-4xl sm:text-6xl font-bold tracking-tight mb-8">
 						Mari membangun<br />sesuatu yang hebat.
 					</h2>
-					<p class="section-subtitle mx-auto mb-12">
+					<p class="section-subtitle mb-12 mx-auto">
 						Saya selalu terbuka untuk mendiskusikan proyek baru, ide kreatif, atau peluang untuk menjadi bagian dari visi Anda.
 					</p>
 
-					<div class="flex flex-wrap justify-center gap-4">
+					<div class="flex flex-wrap items-center justify-center gap-4">
 						<a
 							href="https://linkedin.com/in/mtantowij"
 							target="_blank"
 							class="btn-primary"
-							style="background: #0077b5;"
 						>
 							<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
 							LinkedIn
@@ -362,7 +357,6 @@ const skillCategories = [
 							href="https://wa.me/628115114383"
 							target="_blank"
 							class="btn-primary"
-							style="background: #25D366;"
 						>
 							<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884 0 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
 							WhatsApp

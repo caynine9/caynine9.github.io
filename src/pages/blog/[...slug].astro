@@ -132,7 +132,7 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString("en-us", {
 		line-height: 1.75;
 	}
 	.blog-content a {
-		color: var(--color-apple-link);
+		color: var(--accent);
 		text-decoration: underline;
 		text-underline-offset: 4px;
 	}
@@ -141,13 +141,13 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString("en-us", {
 		margin: 2em auto;
 	}
 	.blog-content blockquote {
-		border-left: 4px solid #e5e7eb;
+		border-left: 4px solid var(--accent);
 		padding-left: 1rem;
 		font-style: italic;
 		color: #6b7280;
 	}
 	:root.dark .blog-content blockquote {
-		border-left-color: #374151;
+		border-left-color: var(--accent);
 		color: #9ca3af;
 	}
 	.blog-content pre {
