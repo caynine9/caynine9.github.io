@@ -271,17 +271,37 @@
 }
 
 /* ============================================
-   SHIKI CODE BLOCKS
+   SHIKI CODE BLOCKS (AUTOMATIC SYNTAX HIGHLIGHTING)
    ============================================ */
 
 @layer base {
-  :root.dark .astro-code {
-    color: var(--shiki-dark) !important;
-    background-color: rgba(0, 0, 0, 0.3) !important;
-    border: 1px solid rgba(255,255,255,0.05);
+  .astro-code {
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 1.25rem;
+    overflow-x: auto;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    background-color: var(--shiki-light-bg, #f6f8fa) !important;
+    color: var(--shiki-light, #24292e) !important;
   }
 
-  :root.dark .astro-code span {
+  /* In Light Mode, preserve Shiki's inline token syntax colors */
+  .astro-code span {
+    color: var(--shiki-light);
+  }
+
+  /* In Dark Mode, switch to github-dark theme colors */
+  :root.dark .astro-code,
+  html.dark .astro-code {
+    background-color: var(--shiki-dark-bg, #0d1117) !important;
+    color: var(--shiki-dark, #c9d1d9) !important;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  :root.dark .astro-code span,
+  html.dark .astro-code span {
     color: var(--shiki-dark) !important;
   }
 }

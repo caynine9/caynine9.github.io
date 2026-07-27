@@ -7,13 +7,6 @@
   <div class="max-w-5xl mx-auto px-5 relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
     
     <div class="flex flex-col items-center md:items-start gap-4">
-      <div class="flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-[var(--border)] bg-[var(--bg)] shadow-sm">
-        <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent)] opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent)]"></span>
-        </span>
-        <span class="text-xs font-semibold text-[var(--text)] uppercase tracking-widest">Available for contracts</span>
-      </div>
       <p class="text-xs font-mono text-[var(--subtle)]">
         &copy; {today.getFullYear()} Muhammad Tantowi Jauhari
       </p>
