@@ -2,9 +2,9 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import { render } from "astro:content";
 import { Image } from "astro:assets";
-import BaseHead from "../../components/BaseHead.astro";
-import Header from "../../components/Header.svelte";
-import Footer from "../../components/Footer.svelte";
+import BaseHead from "../../../components/BaseHead.astro";
+import Header from "../../../components/Header.svelte";
+import Footer from "../../../components/Footer.svelte";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");

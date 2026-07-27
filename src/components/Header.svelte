@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { slide } from "svelte/transition";
+  import { List, X, Moon, Sun } from "phosphor-svelte";
 
   export let currentPath = "/";
 
@@ -54,66 +55,52 @@
   }
 </script>
 
-<div class="fixed top-0 left-0 right-0 z-50 flex justify-center p-4 sm:p-6 pointer-events-none transition-all duration-500 {scrolled ? 'translate-y-0' : 'translate-y-2'}">
-  <header class="pointer-events-auto w-full max-w-4xl {scrolled ? 'glass rounded-full px-6 py-3' : 'bg-transparent px-2 py-4'} transition-all duration-500 flex items-center justify-between">
+<div class="fixed top-0 left-0 right-0 z-50 flex justify-center p-4 sm:p-6 pointer-events-none transition-transform duration-300 ease-out {scrolled ? 'translate-y-0' : 'translate-y-2'}">
+  <header class="pointer-events-auto w-full max-w-5xl {scrolled ? 'glass rounded-full px-5 py-3' : 'bg-transparent px-2 py-4'} transition-all duration-300 ease-out flex items-center justify-between">
     
-    <!-- Mobile Hamburger (Left) -->
-    <div class="sm:hidden flex items-center">
-      <button on:click={toggleMenu} class="p-2 -ml-2 rounded-full hover:bg-[var(--accent-glow)] transition-colors focus:outline-none" aria-label="Toggle menu">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          {#if isMenuOpen}
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          {:else}
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          {/if}
-        </svg>
-      </button>
+    <!-- Left: Monogram Logo -->
+    <div class="flex items-center">
+      <a href={currentLang === "id" ? "/id" : "/"} class="font-mono text-lg font-bold tracking-tight px-3 py-1.5 rounded-lg hover:bg-[var(--accent-glow)] transition-colors text-[var(--text)]">
+        [C9]
+      </a>
     </div>
 
     <!-- Centered Links (Desktop) -->
-    <div class="hidden sm:flex items-center space-x-2 {scrolled ? '' : 'pl-2'}">
-      <a href={currentLang === "id" ? "/id" : "/"} class="relative px-4 py-2 text-sm font-medium transition-colors hover:text-[var(--accent)] {isActive(currentLang === 'id' ? '/id' : '/', true) ? 'text-[var(--accent)]' : 'text-[var(--text)] opacity-70'}">
+    <nav class="hidden sm:flex items-center space-x-1 absolute left-1/2 -translate-x-1/2">
+      <a href={currentLang === "id" ? "/id" : "/"} class="px-4 py-2 text-sm font-medium rounded-full transition-colors hover:text-[var(--text)] hover:bg-[var(--accent-glow)] {isActive(currentLang === 'id' ? '/id' : '/', true) ? 'text-[var(--text)] bg-[var(--accent-glow)]' : 'text-[var(--subtle)]'}">
         {currentLang === "id" ? "Beranda" : "Home"}
-        {#if isActive(currentLang === 'id' ? '/id' : '/', true)}
-          <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-[var(--accent)] rounded-full"></span>
-        {/if}
       </a>
-      <a href={currentLang === "id" ? "/id/blog" : "/blog"} class="relative px-4 py-2 text-sm font-medium transition-colors hover:text-[var(--accent)] {isActive(currentLang === 'id' ? '/id/blog' : '/blog') ? 'text-[var(--accent)]' : 'text-[var(--text)] opacity-70'}">
+      <a href={currentLang === "id" ? "/id/projects" : "/projects"} class="px-4 py-2 text-sm font-medium rounded-full transition-colors hover:text-[var(--text)] hover:bg-[var(--accent-glow)] {isActive(currentLang === 'id' ? '/id/projects' : '/projects') ? 'text-[var(--text)] bg-[var(--accent-glow)]' : 'text-[var(--subtle)]'}">
+        {currentLang === "id" ? "Proyek" : "Projects"}
+      </a>
+      <a href={currentLang === "id" ? "/id/blog" : "/blog"} class="px-4 py-2 text-sm font-medium rounded-full transition-colors hover:text-[var(--text)] hover:bg-[var(--accent-glow)] {isActive(currentLang === 'id' ? '/id/blog' : '/blog') ? 'text-[var(--text)] bg-[var(--accent-glow)]' : 'text-[var(--subtle)]'}">
         Logcat
-        {#if isActive(currentLang === 'id' ? '/id/blog' : '/blog')}
-          <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-[var(--accent)] rounded-full"></span>
-        {/if}
       </a>
-    </div>
+    </nav>
 
-    <!-- Right Actions: Language & Theme -->
-    <div class="flex items-center space-x-3 ml-auto">
+    <!-- Right Actions: Language, Theme & Mobile Menu -->
+    <div class="flex items-center space-x-3">
       <!-- Language Switcher -->
-      <div class="flex items-center bg-[rgba(var(--accent-rgb),0.05)] border border-[var(--border)] rounded-full p-1">
-        <a href={getLanguageUrl("id")} class="px-2.5 py-1 rounded-full text-[11px] font-bold transition-all {currentLang === 'id' ? 'bg-[var(--accent)] text-white shadow-md shadow-[var(--accent-glow)]' : 'opacity-50 hover:opacity-100'}">ID</a>
-        <a href={getLanguageUrl("en")} class="px-2.5 py-1 rounded-full text-[11px] font-bold transition-all {currentLang === 'en' ? 'bg-[var(--accent)] text-white shadow-md shadow-[var(--accent-glow)]' : 'opacity-50 hover:opacity-100'}">EN</a>
+      <div class="hidden sm:flex items-center bg-[var(--bg)] border border-[var(--border)] rounded-full p-1 shadow-sm">
+        <a href={getLanguageUrl("id")} class="flex items-center justify-center min-w-[36px] min-h-[28px] px-2 rounded-full text-xs font-bold font-mono transition-all {currentLang === 'id' ? 'bg-[var(--text)] text-[var(--bg)]' : 'text-[var(--subtle)] hover:text-[var(--text)]'}">ID</a>
+        <a href={getLanguageUrl("en")} class="flex items-center justify-center min-w-[36px] min-h-[28px] px-2 rounded-full text-xs font-bold font-mono transition-all {currentLang === 'en' ? 'bg-[var(--text)] text-[var(--bg)]' : 'text-[var(--subtle)] hover:text-[var(--text)]'}">EN</a>
       </div>
 
-      <button on:click={toggleTheme} class="p-2 rounded-full hover:bg-[var(--accent-glow)] text-[var(--accent)] transition-all focus:outline-none" aria-label="Toggle dark mode">
+      <!-- Theme Toggle -->
+      <button on:click={toggleTheme} class="p-2 rounded-full hover:bg-[var(--accent-glow)] text-[var(--subtle)] hover:text-[var(--accent)] transition-all focus:outline-none focus:ring-2 focus:ring-[var(--accent)] relative" aria-label="Toggle dark mode">
         {#if theme === "light"}
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
+          <Moon size={20} weight="bold" />
         {:else}
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
+          <Sun size={20} weight="bold" />
+        {/if}
+      </button>
+
+      <!-- Mobile Hamburger -->
+      <button on:click={toggleMenu} class="sm:hidden p-2 rounded-full hover:bg-[var(--accent-glow)] text-[var(--text)] transition-colors focus:outline-none" aria-label="Toggle menu">
+        {#if isMenuOpen}
+          <X size={20} weight="bold" />
+        {:else}
+          <List size={20} weight="bold" />
         {/if}
       </button>
     </div>
@@ -122,22 +109,40 @@
 
 <!-- Mobile Menu Dropdown -->
 {#if isMenuOpen}
-  <div transition:slide={{ duration: 300, easing: (t) => 1 - Math.pow(1 - t, 4) }} class="sm:hidden fixed top-[4.5rem] left-4 right-4 z-40 overflow-hidden glass rounded-2xl shadow-2xl">
-    <div class="p-2 space-y-1">
+  <div transition:slide={{ duration: 300, easing: (t) => 1 - Math.pow(1 - t, 4) }} class="sm:hidden fixed top-[4.5rem] left-4 right-4 z-40 overflow-hidden glass rounded-2xl shadow-xl border border-[var(--border)]">
+    <div class="p-3 space-y-1">
       <a
         href={currentLang === "id" ? "/id" : "/"}
-        class="block px-4 py-3 rounded-xl text-base font-medium transition-colors {isActive(currentLang === 'id' ? '/id' : '/', true) ? 'bg-[var(--accent-glow)] text-[var(--accent)]' : 'hover:bg-black/5 dark:hover:bg-white/5'}"
+        class="block px-4 py-3 rounded-xl text-sm font-medium transition-colors {isActive(currentLang === 'id' ? '/id' : '/', true) ? 'bg-[var(--accent-glow)] text-[var(--accent)]' : 'hover:bg-black/5 dark:hover:bg-white/5'}"
         on:click={() => (isMenuOpen = false)}
       >
         {currentLang === "id" ? "Beranda" : "Home"}
       </a>
       <a
+        href={currentLang === "id" ? "/id/projects" : "/projects"}
+        class="block px-4 py-3 rounded-xl text-sm font-medium transition-colors {isActive(currentLang === 'id' ? '/id/projects' : '/projects') ? 'bg-[var(--accent-glow)] text-[var(--accent)]' : 'hover:bg-black/5 dark:hover:bg-white/5'}"
+        on:click={() => (isMenuOpen = false)}
+      >
+        {currentLang === "id" ? "Proyek" : "Projects"}
+      </a>
+      <a
         href={currentLang === "id" ? "/id/blog" : "/blog"}
-        class="block px-4 py-3 rounded-xl text-base font-medium transition-colors {isActive(currentLang === 'id' ? '/id/blog' : '/blog') ? 'bg-[var(--accent-glow)] text-[var(--accent)]' : 'hover:bg-black/5 dark:hover:bg-white/5'}"
+        class="block px-4 py-3 rounded-xl text-sm font-medium transition-colors {isActive(currentLang === 'id' ? '/id/blog' : '/blog') ? 'bg-[var(--accent-glow)] text-[var(--accent)]' : 'hover:bg-black/5 dark:hover:bg-white/5'}"
         on:click={() => (isMenuOpen = false)}
       >
         Logcat
       </a>
+      
+      <div class="h-px w-full bg-[var(--border)] my-2"></div>
+      
+      <!-- Mobile Language Switch -->
+      <div class="flex items-center space-x-2 px-4 py-2">
+        <span class="text-xs font-mono text-[var(--subtle)]">LANG</span>
+        <div class="flex items-center bg-[var(--bg)] border border-[var(--border)] rounded-full p-1 w-fit">
+          <a href={getLanguageUrl("id")} class="flex items-center justify-center min-w-[36px] px-2 py-1 rounded-full text-xs font-bold font-mono transition-all {currentLang === 'id' ? 'bg-[var(--text)] text-[var(--bg)]' : 'text-[var(--subtle)] hover:text-[var(--text)]'}">ID</a>
+          <a href={getLanguageUrl("en")} class="flex items-center justify-center min-w-[36px] px-2 py-1 rounded-full text-xs font-bold font-mono transition-all {currentLang === 'en' ? 'bg-[var(--text)] text-[var(--bg)]' : 'text-[var(--subtle)] hover:text-[var(--text)]'}">EN</a>
+        </div>
+      </div>
     </div>
   </div>
 {/if}

@@ -1,0 +1,359 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.svelte";
+import Footer from "../../components/Footer.svelte";
+import { SITE_TITLE } from "../../consts";
+import { Image } from "astro:assets";
+
+import nebuImg from "../../assets/nebu.webp";
+import edunusaImg from "../../assets/edunusa.webp";
+import mooveImg from "../../assets/moove.webp";
+import fireguardImg from "../../assets/fireguard.webp";
+
+const projectImages: Record<string, any> = {
+	nebu: nebuImg,
+	"edunusa-suite": edunusaImg,
+	moove: mooveImg,
+	fireguard: fireguardImg
+};
+
+const projects = [
+	{
+		id: "nebu",
+		title: "NEBU",
+		subtitle: "Platform Top-Up Digital & Pembayaran Otomatis",
+		type: "Platform Produksi Mandiri (2026)",
+		role: "Product Engineer / Full-stack Developer",
+		link: "https://nebugame.id",
+		deviceType: "browser",
+		badge: "PRODUKSI AKTIF",
+		description: "NEBU adalah platform top-up produk digital mandiri berperforma tinggi yang dirancang dari nol untuk pemrosesan transaksi otomatis, webhook pembayaran andal, dan eksekusi API sub-detik.",
+		stackGroups: [
+			{ name: "Bahasa & Framework", items: "Go (Golang), Svelte" },
+			{ name: "Database & Antrean", items: "MySQL, Redis Queue & Caching" },
+			{ name: "Infrastruktur & VPS", items: "Docker, Nginx Reverse Proxy, Cloudflare" },
+			{ name: "API & Webhook", items: "Midtrans Gateway, Digiflazz H2H Engine" },
+			{ name: "Telemetri & Log", items: "Grafana, Loki, Promtail" }
+		],
+		highlights: [
+			"Mikroservis REST API super cepat yang dibangun dengan Go untuk throughput tinggi",
+			"Antrean pemrosesan transaksi asinkron berbasis Redis untuk pemenuhan pesanan instan",
+			"Integrasi webhook pembayaran Midtrans yang aman dengan rekonsiliasi status otomatis",
+			"Penerapan VPS Linux terisolasi dengan Docker dan dilindungi oleh Cloudflare WAF",
+			"Observabilitas operasional real-time dengan dasbor telemetri Grafana"
+		],
+		challenges: [
+			"Merancang rekonsiliasi webhook otomatis tanpa downtime saat lonjakan transaksi",
+			"Mengelola status transaksi idempoten untuk mencegah eksekusi ganda",
+			"Mengamankan kredensial API H2H langsung dan menangani failover penyedia secara otomatis"
+		],
+		previewData: {
+			url: "https://nebugame.id",
+			title: "NEBU Digital Top-Up Engine",
+			metrics: [
+				{ label: "Kecepatan API", value: "< 85ms" },
+				{ label: "Antrean Worker", value: "Redis Async" },
+				{ label: "Uptime", value: "99.9%" }
+			],
+			tags: ["MOBILE LEGENDS", "FREE FIRE", "PUBG MOBILE", "GENSHIN IMPACT", "Z·Z·Z"]
+		}
+	},
+	{
+		id: "edunusa-suite",
+		title: "Ekosistem EDUNUSA & CBT Engine",
+		subtitle: "Ekosistem Mobile Edukasi Terpadu & Engine CBT Ujian Presisi",
+		type: "Platform Produk Utama (2025 - 2026)",
+		role: "Lead Mobile Architect",
+		link: "#",
+		deviceType: "mobile-tablet",
+		badge: "PRODUK UTAMA",
+		description: "Ekosistem aplikasi mobile lintas platform terpadu yang menggabungkan pembelajaran online interaktif, sinkronisasi data offline-first, dan sistem Computer-Based Test (CBT) aman untuk ujian institusi.",
+		stackGroups: [
+			{ name: "Arsitektur Utama", items: "Kotlin Multiplatform (KMP), Compose Multiplatform, Swift" },
+			{ name: "State & Lifecycle", items: "Decompose, Reactive StateFlow, Clean Architecture" },
+			{ name: "Database & Engine", items: "Room DB (Encrypted Cache), Ktor HTTP Engine" },
+			{ name: "Keamanan & Anti-Cheat", items: "Hardware Secure Enclave, Kiosk Mode Lockdown" }
+		],
+		highlights: [
+			"Satu basis kode Kotlin bersama yang menggerakkan 85%+ UI dan logika bisnis di iOS & Android",
+			"Sistem proteksi ujian CBT anti-kecurangan berbasis API hardware secure enclave",
+			"Pencatatan respons ujian tanpa latensi dengan preservasi status offline instan saat koneksi terputus",
+			"Arsitektur modular multi-module dengan struktur navigasi Decompose yang sadar siklus hidup",
+			"Desain UI ujian split-pane teroptimasi untuk tablet dan smartphone"
+		],
+		challenges: [
+			"Mengarahkan komponen Compose Multiplatform UI agar tampil mulus 60fps di iOS",
+			"Memastikan kuncian perangkat anti-cheat berfungsi stabil di berbagai versi Android & iOS",
+			"Menjamin integritas data jawaban ujian bahkan saat perangkat kehilangan daya secara mendadak"
+		],
+		previewData: {
+			title: "EDUNUSA Multiplatform Suite",
+			metrics: [
+				{ label: "Berbagi Kode", value: "85% KMP" },
+				{ label: "Platform", value: "iOS & Android" },
+				{ label: "Keamanan", value: "Enclave Lock" }
+			],
+			tags: ["Kelas Online", "Ujian CBT Presisi", "Sync Offline", "Anti-Cheat Active"]
+		}
+	},
+	{
+		id: "moove",
+		title: "Moove",
+		subtitle: "Perencana Rencana Liburan & Itinerary Berbasis AI",
+		type: "Bangkit Academy Top Capstone (2024)",
+		role: "Android Lead Developer",
+		link: "#",
+		deviceType: "mobile",
+		badge: "TOP CAPSTONE",
+		description: "Aplikasi perencanaan liburan pintar yang menghitung rute perjalanan optimal, estimasi anggaran, dan jadwal kunjungan secara otomatis menggunakan perhitungan spasial real-time.",
+		stackGroups: [
+			{ name: "Bahasa & Framework", items: "Kotlin Native, Jetpack Compose" },
+			{ name: "Arsitektur", items: "MVVM, Kotlin Coroutines & Flow" },
+			{ name: "API & Layanan", items: "Retrofit HTTP, Google Maps SDK, Location API" }
+		],
+		highlights: [
+			"Terpilih sebagai Top Capstone Project di antara 4.000+ peserta program Bangkit Academy",
+			"Integrasi Google Maps SDK interaktif dengan kustomisasi rute dan penanda titik lokasi",
+			"Algoritma alokasi anggaran otomatis dengan tampilan linimasa jadwal harian",
+			"Arsitektur MVVM reaktif dengan pemisahan lapisan kode yang rapi"
+		],
+		challenges: [
+			"Mengoptimalkan algoritma perhitungan rute di sisi klien tanpa menguras baterai",
+			"Merender grafis garis rute peta secara mulus saat ada pembaruan lokasi GPS real-time"
+		],
+		previewData: {
+			title: "Moove AI Travel Planner",
+			metrics: [
+				{ label: "Penghargaan", value: "Top Project" },
+				{ label: "Teknologi", value: "Compose & Maps" },
+				{ label: "Status", value: "Selesai" }
+			],
+			tags: ["Rencana Liburan", "Peta Interaktif", "Estimasi Biaya", "Jadwal Harian"]
+		}
+	},
+	{
+		id: "fireguard",
+		title: "FireGuard",
+		subtitle: "Telemetri Kebakaran Hutan & Monitoring Lingkungan IoT",
+		type: "Inovasi Agrotech (2024)",
+		role: "Mobile & Systems Developer",
+		link: "#",
+		deviceType: "browser-mobile",
+		badge: "TELEMETRI HARDWARE",
+		description: "Sistem pemantauan telemetri real-time yang menghubungkan node sensor IoT dengan API OpenWeatherMap untuk mendeteksi anomali kebakaran hutan dan mengirimkan notifikasi darurat.",
+		stackGroups: [
+			{ name: "Mobile & Telemetri", items: "Kotlin, Telemetry REST API" },
+			{ name: "Cloud & Peringatan", items: "Sensor Telemetry Services, OpenWeatherMap API, FCM Push" }
+		],
+		highlights: [
+			"Pemrosesan telemetri sensor real-time dengan pemicu ambang batas peringatan dinamis",
+			"Peta risiko spasial interaktif memvisualisasikan suhu, kelembapan, dan area rawan api",
+			"Sistem notifikasi darurat cepat berbasis pesanan push berprioritas tinggi",
+			"Pipa konsumsi data telemetri REST yang andal dalam menangani pembaruan node sensor"
+		],
+		challenges: [
+			"Filtrasi data telemetri sensor yang bising secara real-time untuk mencegah alarm palsu",
+			"Menjamin pengiriman notifikasi darurat yang instan dalam kondisi jaringan dengan kehilangan paket data"
+		],
+		previewData: {
+			title: "FireGuard Telemetry Center",
+			metrics: [
+				{ label: "Pipa Data", value: "Real-Time REST" },
+				{ label: "Integrasi", value: "OpenWeatherMap" },
+				{ label: "Peringatan", value: "Instant Push" }
+			],
+			tags: ["Sensor Telemetri", "Peta Sebaran Api", "Status Thermal", "Telemetry Node"]
+		}
+	}
+];
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <BaseHead title={`Proyek | ${SITE_TITLE}`} description="Showcase lengkap proyek aplikasi mobile Kotlin Multiplatform, backend Go, dan infrastruktur sistem oleh Muhammad Tantowi Jauhari." />
+  </head>
+  <body class="relative overflow-x-hidden">
+    <div class="ambient-glow"></div>
+    <Header client:load currentPath={Astro.url.pathname} />
+
+    <main class="w-full pt-24 md:pt-32 pb-24">
+      
+      <!-- Page Header -->
+      <section class="px-6 md:px-12 lg:px-20 mb-16 md:mb-24">
+        <div class="max-w-7xl mx-auto">
+          <div class="reveal">
+            <div class="text-xs font-mono text-[var(--accent)] tracking-widest uppercase mb-4 flex items-center gap-3">
+              <span class="w-8 h-px bg-[var(--accent)]"></span>
+              SHOWCASE PORTOFOLIO
+            </div>
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter text-[var(--text)] mb-6">
+              Showcase <span class="text-[var(--accent)]">Proyek & Studi Kasus</span>
+            </h1>
+            <p class="text-lg md:text-xl text-[var(--subtle)] max-w-3xl leading-relaxed">
+              Bedah teknis mendalam tentang sistem produksi, arsitektur aplikasi mobile lintas platform, platform digital otomatis, dan alat sistem yang dibangun dari awal.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Advanced Parallax & Interactive Device Showcase -->
+      <section class="px-6 md:px-12 lg:px-20 space-y-24 md:space-y-32">
+        <div class="max-w-7xl mx-auto space-y-24 md:space-y-32">
+          
+          {projects.map((project, idx) => (
+            <div id={project.id} class="reveal group relative scroll-mt-28">
+              
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch card-elevated p-6 sm:p-10 md:p-12">
+                
+                <!-- Left Details & Technical Specs -->
+                <div class="lg:col-span-7 flex flex-col justify-between space-y-8">
+                  <div>
+                    <!-- Badge & Type -->
+                    <div class="flex flex-wrap items-center gap-3 mb-6">
+                      <span class="px-3.5 py-1 rounded-full text-xs font-mono font-bold bg-[rgba(var(--accent-rgb),0.1)] text-[var(--accent)] border border-[rgba(var(--accent-rgb),0.25)]">
+                        {project.badge}
+                      </span>
+                      <span class="text-xs font-mono text-[var(--subtle)]">{project.type}</span>
+                    </div>
+
+                    <!-- Title & Subtitle -->
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[var(--text)] tracking-tight mb-3 group-hover:text-[var(--accent)] transition-colors">
+                      {project.title}
+                    </h2>
+                    <div class="text-base font-medium text-[var(--accent)] font-mono mb-6">
+                      Peran: {project.role}
+                    </div>
+
+                    <!-- Description -->
+                    <p class="text-base sm:text-lg leading-relaxed text-[var(--subtle)] mb-8">
+                      {project.description}
+                    </p>
+
+                    <!-- Technical Stack Groups -->
+                    <div class="space-y-4 mb-8">
+                      <div class="text-xs font-mono text-[var(--subtle)] uppercase tracking-wider font-bold">Arsitektur Teknologi</div>
+                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {project.stackGroups.map(group => (
+                          <div class="p-3.5 rounded-xl border border-[var(--border)] bg-black/5 dark:bg-white/5">
+                            <div class="text-[10px] font-mono text-[var(--accent)] uppercase font-semibold mb-1">{group.name}</div>
+                            <div class="text-xs font-semibold text-[var(--text)]">{group.items}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <!-- Key Engineering Highlights -->
+                    <div class="space-y-3 pt-6 border-t border-[var(--border)]">
+                      <div class="text-xs font-mono text-[var(--subtle)] uppercase tracking-wider font-bold mb-2">Pencapaian Teknis Utama</div>
+                      {project.highlights.map(h => (
+                        <div class="flex items-start text-xs sm:text-sm text-[var(--subtle)]">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mr-3 mt-0.5 text-[var(--accent)] shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                          <span>{h}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                  </div>
+
+                  <!-- External Link if available -->
+                  {project.link !== "#" && (
+                    <div class="pt-6 border-t border-[var(--border)] flex items-center justify-between">
+                      <a href={project.link} target="_blank" rel="noopener noreferrer" class="btn-primary">
+                        Kunjungi Platform Live
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                      </a>
+                    </div>
+                  )}
+                </div>
+
+                <!-- Right Device Frame Preview Mockup -->
+                <div class="lg:col-span-5 flex flex-col justify-center items-center relative min-h-[380px] rounded-3xl bg-black/5 dark:bg-white/5 p-6 border border-[var(--border)] overflow-hidden group/img">
+                  
+                  <!-- Ambient Glowing Background Aura -->
+                  <div class="absolute -inset-10 bg-[var(--accent)]/15 opacity-60 blur-3xl rounded-full group-hover/img:opacity-85 transition-opacity duration-700 pointer-events-none"></div>
+
+                  <!-- Frame Container -->
+                  <div class="relative z-10 w-full flex flex-col items-center justify-center">
+                    
+                    <div class="relative max-w-md w-full rounded-2xl overflow-hidden glass border border-[var(--border)] shadow-2xl transition-transform duration-700 group-hover/img:scale-[1.03]">
+                      
+                      <!-- Top Bar Header Mockup -->
+                      <div class="px-4 py-2.5 bg-black/10 dark:bg-white/10 border-b border-[var(--border)] flex items-center justify-between backdrop-blur-md">
+                        <div class="flex items-center space-x-1.5">
+                          <span class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+                          <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block"></span>
+                          <span class="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block"></span>
+                        </div>
+                        <span class="text-[10px] font-mono text-[var(--accent)] font-semibold uppercase tracking-wider">MOCKUP {project.title}</span>
+                        <div class="w-10"></div>
+                      </div>
+
+                      <!-- Image Canvas -->
+                      <div class="p-3 bg-black/20 dark:bg-black/40 flex items-center justify-center">
+                        <Image
+                          src={projectImages[project.id]}
+                          alt={project.title}
+                          width={800}
+                          height={600}
+                          class="w-full h-auto max-h-[360px] object-contain rounded-xl shadow-md transition-transform duration-500 group-hover/img:scale-105"
+                          quality={95}
+                          format="webp"
+                        />
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          ))}
+
+        </div>
+      </section>
+
+      <!-- Bottom Contact Teaser -->
+      <section class="mt-24 px-6 md:px-12 lg:px-20">
+        <div class="max-w-7xl mx-auto text-center reveal card-elevated p-12">
+          <h3 class="text-2xl sm:text-3xl font-extrabold text-[var(--text)] mb-4">Ingin Membangun Aplikasi System atau Mobile?</h3>
+          <p class="text-base text-[var(--subtle)] max-w-xl mx-auto mb-8">
+            Tersedia untuk rekayasa Kotlin Multiplatform, arsitektur microservices Go, dan konsultasi teknis.
+          </p>
+          <a href="/id/#contact" class="btn-primary">
+            Diskusi Proyek
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <Footer client:idle />
+
+    <script>
+      const setupObserver = () => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.1,
+          rootMargin: "0px 0px -50px 0px"
+        });
+
+        document.querySelectorAll('.reveal').forEach(el => {
+          observer.observe(el);
+        });
+      };
+
+      document.addEventListener('DOMContentLoaded', setupObserver);
+      document.addEventListener('astro:page-load', setupObserver);
+    </script>
+  </body>
+</html>

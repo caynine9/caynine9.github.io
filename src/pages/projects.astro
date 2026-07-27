@@ -1,0 +1,359 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.svelte";
+import Footer from "../components/Footer.svelte";
+import { SITE_TITLE } from "../consts";
+import { Image } from "astro:assets";
+
+import nebuImg from "../assets/nebu.webp";
+import edunusaImg from "../assets/edunusa.webp";
+import mooveImg from "../assets/moove.webp";
+import fireguardImg from "../assets/fireguard.webp";
+
+const projectImages: Record<string, any> = {
+	nebu: nebuImg,
+	"edunusa-suite": edunusaImg,
+	moove: mooveImg,
+	fireguard: fireguardImg
+};
+
+const projects = [
+	{
+		id: "nebu",
+		title: "NEBU",
+		subtitle: "Digital Top-Up & Automated Payment Platform",
+		type: "Personal Production Platform (2026)",
+		role: "Product Engineer / Full-stack Developer",
+		link: "https://nebugame.id",
+		deviceType: "browser",
+		badge: "ACTIVE PRODUCTION",
+		description: "NEBU is an independent, high-performance digital top-up platform engineered from scratch for automated transaction fulfillment, resilient payment webhooks, and sub-second API execution.",
+		stackGroups: [
+			{ name: "Language & Framework", items: "Go (Golang), Svelte" },
+			{ name: "Database & Queue", items: "MySQL, Redis Queue & Caching" },
+			{ name: "Deployment & Infra", items: "Docker, Nginx Reverse Proxy, Cloudflare" },
+			{ name: "API & Webhooks", items: "Midtrans Gateway, Digiflazz H2H Engine" },
+			{ name: "Telemetry & Logs", items: "Grafana, Loki, Promtail" }
+		],
+		highlights: [
+			"Ultra-fast REST API microservices engineered in Go for high throughput",
+			"Asynchronous transaction worker queue using Redis to process top-ups instantly",
+			"Seamless integration with Midtrans payment webhooks and automated status reconciliation",
+			"Hardened Linux VPS deployment containerized with Docker and protected by Cloudflare WAF",
+			"Real-time operational observability with Grafana dashboard telemetry"
+		],
+		challenges: [
+			"Architecting zero-downtime automated webhook reconciliation during payment spikes",
+			"Managing idempotent transaction states to prevent double-fulfillment",
+			"Securing direct H2H API credentials and handling provider failover automatically"
+		],
+		previewData: {
+			url: "https://nebugame.id",
+			title: "NEBU Digital Top-Up Engine",
+			metrics: [
+				{ label: "API Speed", value: "< 85ms" },
+				{ label: "Worker Queue", value: "Redis Async" },
+				{ label: "Uptime", value: "99.9%" }
+			],
+			tags: ["MOBILE LEGENDS", "FREE FIRE", "PUBG MOBILE", "GENSHIN IMPACT", "Z·Z·Z"]
+		}
+	},
+	{
+		id: "edunusa-suite",
+		title: "EDUNUSA Ecosystem & CBT Engine",
+		subtitle: "Unified Mobile Educational Ecosystem & High-Security CBT",
+		type: "Flagship Enterprise Platform (2025 - 2026)",
+		role: "Lead Mobile Architect",
+		link: "#",
+		deviceType: "mobile-tablet",
+		badge: "FLAGSHIP ECOSYSTEM",
+		description: "A unified cross-platform mobile suite combining interactive online learning, offline-first data sync, and a high-security Computer-Based Test (CBT) lockdown engine for tamper-proof institutional exams.",
+		stackGroups: [
+			{ name: "Core Architecture", items: "Kotlin Multiplatform (KMP), Compose Multiplatform, Swift" },
+			{ name: "State & Lifecycle", items: "Decompose, Reactive StateFlow, Clean Architecture" },
+			{ name: "Database & Engine", items: "Room DB (Encrypted Cache), Ktor HTTP Engine" },
+			{ name: "Security & Anti-Cheat", items: "Hardware Secure Enclave, Kiosk Mode Lockdown" }
+		],
+		highlights: [
+			"Single shared Kotlin codebase powering 85%+ UI and business logic across iOS & Android",
+			"Tamper-proof CBT exam lockdown backed by hardware secure enclave APIs",
+			"Zero-latency exam response logging with instant offline state preservation during disconnections",
+			"Modular multi-module architecture with Decompose lifecycle-aware navigation trees",
+			"Optimized split-pane exam UI tailored for tablets and iOS/Android phone viewports"
+		],
+		challenges: [
+			"Adapting Compose Multiplatform UI components to render natively with 60fps fluidity on iOS",
+			"Ensuring bulletproof anti-cheat device lockdown across fragmented Android & iOS versions",
+			"Guaranteeing exam response integrity even during unexpected device power cutoffs"
+		],
+		previewData: {
+			title: "EDUNUSA Multiplatform Suite",
+			metrics: [
+				{ label: "Code Shared", value: "85% KMP" },
+				{ label: "Platforms", value: "iOS & Android" },
+				{ label: "Security", value: "Enclave Lock" }
+			],
+			tags: ["Kelas Online", "Ujian CBT Presisi", "Sync Offline", "Anti-Cheat Active"]
+		}
+	},
+	{
+		id: "moove",
+		title: "Moove",
+		subtitle: "AI Vacation & Itinerary Route Planner",
+		type: "Bangkit Academy Top Capstone (2024)",
+		role: "Android Lead Developer",
+		link: "#",
+		deviceType: "mobile",
+		badge: "TOP CAPSTONE",
+		description: "Smart vacation planning mobile application that automatically computes optimal travel routes, budget forecasts, and attraction schedules using real-time geospatial calculations.",
+		stackGroups: [
+			{ name: "Language & Framework", items: "Kotlin Native, Jetpack Compose" },
+			{ name: "Architecture", items: "MVVM, Kotlin Coroutines & Flow" },
+			{ name: "APIs & Services", items: "Retrofit HTTP, Google Maps SDK, Location API" }
+		],
+		highlights: [
+			"Awarded Top Capstone Project distinction among 4,000+ Bangkit cohort participants",
+			"Interactive Google Maps SDK integration featuring custom route overlays and destination waypoints",
+			"Automated budget distribution algorithms with daily itinerary timeline views",
+			"Reactive MVVM architecture with clean layer separation and reactive Coroutine Flows"
+		],
+		challenges: [
+			"Optimizing client-side route matrix computations without draining battery performance",
+			"Seamlessly rendering interactive Map Polyline graphics during real-time GPS updates"
+		],
+		previewData: {
+			title: "Moove AI Travel Planner",
+			metrics: [
+				{ label: "Award", value: "Top Project" },
+				{ label: "Tech", value: "Compose & Maps" },
+				{ label: "Status", value: "Completed" }
+			],
+			tags: ["Rencana Liburan", "Peta Interaktif", "Estimasi Biaya", "Jadwal Harian"]
+		}
+	},
+	{
+		id: "fireguard",
+		title: "FireGuard",
+		subtitle: "Forest Fire Telemetry & Environmental Monitor",
+		type: "Agrotech Hardware Innovation (2024)",
+		role: "Mobile & Systems Developer",
+		link: "#",
+		deviceType: "browser-mobile",
+		badge: "HARDWARE TELEMETRY",
+		description: "Real-time telemetry and early warning system connecting custom IoT sensor nodes with OpenWeatherMap APIs to detect wildfire anomalies and trigger emergency push notifications.",
+		stackGroups: [
+			{ name: "Mobile & Telemetry", items: "Kotlin, Telemetry REST API" },
+			{ name: "Cloud & Alerts", items: "Sensor Telemetry Services, OpenWeatherMap API, FCM Push" }
+		],
+		highlights: [
+			"Real-time sensor telemetry processing with dynamic threshold alert triggers",
+			"Interactive geospatial risk map visualizing temperature, humidity, and fire danger zones",
+			"Emergency dispatch notification system powered by high-priority push messaging",
+			"Resilient REST telemetry ingestion pipeline handling continuous sensor node updates"
+		],
+		challenges: [
+			"Filtering noisy sensor telemetry data streams in real time to eliminate false fire alarms",
+			"Ensuring immediate emergency push notifications under high packet loss network conditions"
+		],
+		previewData: {
+			title: "FireGuard Telemetry Center",
+			metrics: [
+				{ label: "Data Pipeline", value: "Real-Time REST" },
+				{ label: "Integration", value: "OpenWeatherMap" },
+				{ label: "Alerts", value: "Instant Push" }
+			],
+			tags: ["Sensor Telemetri", "Peta Sebaran Api", "Status Thermal", "Telemetry Node"]
+		}
+	}
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={`Projects | ${SITE_TITLE}`} description="Full technical showcase of flagship platforms, Kotlin Multiplatform mobile apps, Go backends, and system infrastructure engineered by Muhammad Tantowi Jauhari." />
+  </head>
+  <body class="relative overflow-x-hidden">
+    <div class="ambient-glow"></div>
+    <Header client:load currentPath={Astro.url.pathname} />
+
+    <main class="w-full pt-24 md:pt-32 pb-24">
+      
+      <!-- Page Header -->
+      <section class="px-6 md:px-12 lg:px-20 mb-16 md:mb-24">
+        <div class="max-w-7xl mx-auto">
+          <div class="reveal">
+            <div class="text-xs font-mono text-[var(--accent)] tracking-widest uppercase mb-4 flex items-center gap-3">
+              <span class="w-8 h-px bg-[var(--accent)]"></span>
+              PORTFOLIO SHOWCASE
+            </div>
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter text-[var(--text)] mb-6">
+              Engineering <span class="text-[var(--accent)]">Work & Case Studies</span>
+            </h1>
+            <p class="text-lg md:text-xl text-[var(--subtle)] max-w-3xl leading-relaxed">
+              In-depth technical breakdown of production systems, cross-platform mobile architectures, automated digital platforms, and system tools built from the ground up.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Advanced Parallax & Interactive Device Showcase -->
+      <section class="px-6 md:px-12 lg:px-20 space-y-24 md:space-y-32">
+        <div class="max-w-7xl mx-auto space-y-24 md:space-y-32">
+          
+          {projects.map((project, idx) => (
+            <div id={project.id} class="reveal group relative scroll-mt-28">
+              
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch card-elevated p-6 sm:p-10 md:p-12">
+                
+                <!-- Left Details & Technical Specs -->
+                <div class="lg:col-span-7 flex flex-col justify-between space-y-8">
+                  <div>
+                    <!-- Badge & Type -->
+                    <div class="flex flex-wrap items-center gap-3 mb-6">
+                      <span class="px-3.5 py-1 rounded-full text-xs font-mono font-bold bg-[rgba(var(--accent-rgb),0.1)] text-[var(--accent)] border border-[rgba(var(--accent-rgb),0.25)]">
+                        {project.badge}
+                      </span>
+                      <span class="text-xs font-mono text-[var(--subtle)]">{project.type}</span>
+                    </div>
+
+                    <!-- Title & Subtitle -->
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[var(--text)] tracking-tight mb-3 group-hover:text-[var(--accent)] transition-colors">
+                      {project.title}
+                    </h2>
+                    <div class="text-base font-medium text-[var(--accent)] font-mono mb-6">
+                      Role: {project.role}
+                    </div>
+
+                    <!-- Description -->
+                    <p class="text-base sm:text-lg leading-relaxed text-[var(--subtle)] mb-8">
+                      {project.description}
+                    </p>
+
+                    <!-- Technical Stack Groups -->
+                    <div class="space-y-4 mb-8">
+                      <div class="text-xs font-mono text-[var(--subtle)] uppercase tracking-wider font-bold">Technical Stack Architecture</div>
+                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {project.stackGroups.map(group => (
+                          <div class="p-3.5 rounded-xl border border-[var(--border)] bg-black/5 dark:bg-white/5">
+                            <div class="text-[10px] font-mono text-[var(--accent)] uppercase font-semibold mb-1">{group.name}</div>
+                            <div class="text-xs font-semibold text-[var(--text)]">{group.items}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <!-- Key Engineering Highlights -->
+                    <div class="space-y-3 pt-6 border-t border-[var(--border)]">
+                      <div class="text-xs font-mono text-[var(--subtle)] uppercase tracking-wider font-bold mb-2">Key Engineering Accomplishments</div>
+                      {project.highlights.map(h => (
+                        <div class="flex items-start text-xs sm:text-sm text-[var(--subtle)]">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mr-3 mt-0.5 text-[var(--accent)] shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                          <span>{h}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                  </div>
+
+                  <!-- External Link if available -->
+                  {project.link !== "#" && (
+                    <div class="pt-6 border-t border-[var(--border)] flex items-center justify-between">
+                      <a href={project.link} target="_blank" rel="noopener noreferrer" class="btn-primary">
+                        Visit Live Platform
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                      </a>
+                    </div>
+                  )}
+                </div>
+
+                <!-- Right Device Frame Preview Mockup -->
+                <div class="lg:col-span-5 flex flex-col justify-center items-center relative min-h-[380px] rounded-3xl bg-black/5 dark:bg-white/5 p-6 border border-[var(--border)] overflow-hidden group/img">
+                  
+                  <!-- Ambient Glowing Background Aura -->
+                  <div class="absolute -inset-10 bg-[var(--accent)]/15 opacity-60 blur-3xl rounded-full group-hover/img:opacity-85 transition-opacity duration-700 pointer-events-none"></div>
+
+                  <!-- Frame Container -->
+                  <div class="relative z-10 w-full flex flex-col items-center justify-center">
+                    
+                    <div class="relative max-w-md w-full rounded-2xl overflow-hidden glass border border-[var(--border)] shadow-2xl transition-transform duration-700 group-hover/img:scale-[1.03]">
+                      
+                      <!-- Top Bar Header Mockup -->
+                      <div class="px-4 py-2.5 bg-black/10 dark:bg-white/10 border-b border-[var(--border)] flex items-center justify-between backdrop-blur-md">
+                        <div class="flex items-center space-x-1.5">
+                          <span class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+                          <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block"></span>
+                          <span class="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block"></span>
+                        </div>
+                        <span class="text-[10px] font-mono text-[var(--accent)] font-semibold uppercase tracking-wider">{project.title} MOCKUP</span>
+                        <div class="w-10"></div>
+                      </div>
+
+                      <!-- Image Canvas -->
+                      <div class="p-3 bg-black/20 dark:bg-black/40 flex items-center justify-center">
+                        <Image
+                          src={projectImages[project.id]}
+                          alt={project.title}
+                          width={800}
+                          height={600}
+                          class="w-full h-auto max-h-[360px] object-contain rounded-xl shadow-md transition-transform duration-500 group-hover/img:scale-105"
+                          quality={95}
+                          format="webp"
+                        />
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          ))}
+
+        </div>
+      </section>
+
+      <!-- Bottom Contact Teaser -->
+      <section class="mt-24 px-6 md:px-12 lg:px-20">
+        <div class="max-w-7xl mx-auto text-center reveal card-elevated p-12">
+          <h3 class="text-2xl sm:text-3xl font-extrabold text-[var(--text)] mb-4">Have a System or Mobile App to Architect?</h3>
+          <p class="text-base text-[var(--subtle)] max-w-xl mx-auto mb-8">
+            Available for Kotlin Multiplatform engineering, Go microservice architecture, and technical consulting.
+          </p>
+          <a href="/#contact" class="btn-primary">
+            Let's Talk Projects
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <Footer client:idle />
+
+    <script>
+      const setupObserver = () => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.1,
+          rootMargin: "0px 0px -50px 0px"
+        });
+
+        document.querySelectorAll('.reveal').forEach(el => {
+          observer.observe(el);
+        });
+      };
+
+      document.addEventListener('DOMContentLoaded', setupObserver);
+      document.addEventListener('astro:page-load', setupObserver);
+    </script>
+  </body>
+</html>
