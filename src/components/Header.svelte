@@ -12,12 +12,10 @@
   $: currentLang = currentPath.startsWith("/id") ? "id" : "en";
 
   onMount(() => {
-    theme = document.documentElement.classList.contains("dark")
-      ? "dark"
-      : "light";
+    theme = document.documentElement.classList.contains("dark") ? "dark" : "light";
 
     const onScroll = () => {
-      scrolled = window.scrollY > 10;
+      scrolled = window.scrollY > 20;
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -48,34 +46,21 @@
         : currentPath;
     }
   }
+
+  function isActive(path: string, exact = false) {
+    if (exact) return currentPath === path;
+    if (path === "/" || path === "/id") return currentPath === path;
+    return currentPath.startsWith(path);
+  }
 </script>
 
-<header
-  class="sticky top-0 z-50 header-base"
-  class:header-scrolled={scrolled}
-  class:header-top={!scrolled}
->
-  <nav
-    class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative h-14 flex items-center justify-between"
-  >
+<div class="fixed top-0 left-0 right-0 z-50 flex justify-center p-4 sm:p-6 pointer-events-none transition-all duration-500 {scrolled ? 'translate-y-0' : 'translate-y-2'}">
+  <header class="pointer-events-auto w-full max-w-4xl {scrolled ? 'glass rounded-full px-6 py-3' : 'bg-transparent px-2 py-4'} transition-all duration-500 flex items-center justify-between">
+    
     <!-- Mobile Hamburger (Left) -->
     <div class="sm:hidden flex items-center">
-      <button
-        on:click={toggleMenu}
-        class="p-2 -ml-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors focus:outline-none"
-        aria-label="Toggle menu"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
+      <button on:click={toggleMenu} class="p-2 -ml-2 rounded-full hover:bg-[var(--accent-glow)] transition-colors focus:outline-none" aria-label="Toggle menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           {#if isMenuOpen}
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -89,78 +74,36 @@
     </div>
 
     <!-- Centered Links (Desktop) -->
-    <div
-      class="hidden sm:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center space-x-10"
-    >
-      <a
-        href={currentLang === "id" ? "/id" : "/"}
-        class="text-[14px] font-medium tracking-tight transition-opacity hover:opacity-100 opacity-70"
-        >{currentLang === "id" ? "Beranda" : "Home"}</a
-      >
-      <a
-        href={currentLang === "id" ? "/id/blog" : "/blog"}
-        class="text-[14px] font-medium tracking-tight transition-opacity hover:opacity-100 opacity-70"
-        >Logcat</a
-      >
+    <div class="hidden sm:flex items-center space-x-2 {scrolled ? '' : 'pl-2'}">
+      <a href={currentLang === "id" ? "/id" : "/"} class="relative px-4 py-2 text-sm font-medium transition-colors hover:text-[var(--accent)] {isActive(currentLang === 'id' ? '/id' : '/', true) ? 'text-[var(--accent)]' : 'text-[var(--text)] opacity-70'}">
+        {currentLang === "id" ? "Beranda" : "Home"}
+        {#if isActive(currentLang === 'id' ? '/id' : '/', true)}
+          <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-[var(--accent)] rounded-full"></span>
+        {/if}
+      </a>
+      <a href={currentLang === "id" ? "/id/blog" : "/blog"} class="relative px-4 py-2 text-sm font-medium transition-colors hover:text-[var(--accent)] {isActive(currentLang === 'id' ? '/id/blog' : '/blog') ? 'text-[var(--accent)]' : 'text-[var(--text)] opacity-70'}">
+        Logcat
+        {#if isActive(currentLang === 'id' ? '/id/blog' : '/blog')}
+          <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-[var(--accent)] rounded-full"></span>
+        {/if}
+      </a>
     </div>
 
     <!-- Right Actions: Language & Theme -->
-    <div class="flex items-center space-x-2 ml-auto">
+    <div class="flex items-center space-x-3 ml-auto">
       <!-- Language Switcher -->
-      <div
-        class="flex items-center bg-black/5 dark:bg-white/5 rounded-full p-1 mr-2"
-      >
-        <a
-          href={getLanguageUrl("id")}
-          class="px-2 py-1 rounded-full text-[10px] font-bold transition-all {currentLang ===
-          'id'
-            ? 'bg-white text-black dark:bg-gray-800 dark:text-white shadow-sm opacity-100'
-            : 'opacity-40 hover:opacity-70'}"
-        >
-          ID
-        </a>
-        <a
-          href={getLanguageUrl("en")}
-          class="px-2 py-1 rounded-full text-[10px] font-bold transition-all {currentLang ===
-          'en'
-            ? 'bg-white text-black dark:bg-gray-800 dark:text-white shadow-sm opacity-100'
-            : 'opacity-40 hover:opacity-70'}"
-        >
-          EN
-        </a>
+      <div class="flex items-center bg-[rgba(var(--accent-rgb),0.05)] border border-[var(--border)] rounded-full p-1">
+        <a href={getLanguageUrl("id")} class="px-2.5 py-1 rounded-full text-[11px] font-bold transition-all {currentLang === 'id' ? 'bg-[var(--accent)] text-white shadow-md shadow-[var(--accent-glow)]' : 'opacity-50 hover:opacity-100'}">ID</a>
+        <a href={getLanguageUrl("en")} class="px-2.5 py-1 rounded-full text-[11px] font-bold transition-all {currentLang === 'en' ? 'bg-[var(--accent)] text-white shadow-md shadow-[var(--accent-glow)]' : 'opacity-50 hover:opacity-100'}">EN</a>
       </div>
 
-      <button
-        on:click={toggleTheme}
-        class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors focus:outline-none"
-        aria-label="Toggle dark mode"
-      >
+      <button on:click={toggleTheme} class="p-2 rounded-full hover:bg-[var(--accent-glow)] text-[var(--accent)] transition-all focus:outline-none" aria-label="Toggle dark mode">
         {#if theme === "light"}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         {:else}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -174,56 +117,27 @@
         {/if}
       </button>
     </div>
-  </nav>
+  </header>
+</div>
 
-  <!-- Mobile Menu -->
-  {#if isMenuOpen}
-    <div
-      transition:slide={{ duration: 300 }}
-      class="sm:hidden border-t overflow-hidden"
-      style="border-color: var(--border); background: var(--card);"
-    >
-      <div class="px-4 pt-2 pb-6 space-y-1">
-        <a
-          href={currentLang === "id" ? "/id" : "/"}
-          class="block px-3 py-3 rounded-xl text-base font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
-          on:click={() => (isMenuOpen = false)}
-        >
-          {currentLang === "id" ? "Beranda" : "Home"}
-        </a>
-        <a
-          href={currentLang === "id" ? "/id/blog" : "/blog"}
-          class="block px-3 py-3 rounded-xl text-base font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
-          on:click={() => (isMenuOpen = false)}
-        >
-          Logcat
-        </a>
-      </div>
+<!-- Mobile Menu Dropdown -->
+{#if isMenuOpen}
+  <div transition:slide={{ duration: 300, easing: (t) => 1 - Math.pow(1 - t, 4) }} class="sm:hidden fixed top-[4.5rem] left-4 right-4 z-40 overflow-hidden glass rounded-2xl shadow-2xl">
+    <div class="p-2 space-y-1">
+      <a
+        href={currentLang === "id" ? "/id" : "/"}
+        class="block px-4 py-3 rounded-xl text-base font-medium transition-colors {isActive(currentLang === 'id' ? '/id' : '/', true) ? 'bg-[var(--accent-glow)] text-[var(--accent)]' : 'hover:bg-black/5 dark:hover:bg-white/5'}"
+        on:click={() => (isMenuOpen = false)}
+      >
+        {currentLang === "id" ? "Beranda" : "Home"}
+      </a>
+      <a
+        href={currentLang === "id" ? "/id/blog" : "/blog"}
+        class="block px-4 py-3 rounded-xl text-base font-medium transition-colors {isActive(currentLang === 'id' ? '/id/blog' : '/blog') ? 'bg-[var(--accent-glow)] text-[var(--accent)]' : 'hover:bg-black/5 dark:hover:bg-white/5'}"
+        on:click={() => (isMenuOpen = false)}
+      >
+        Logcat
+      </a>
     </div>
-  {/if}
-</header>
-
-<style>
-  .header-base {
-    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease, -webkit-backdrop-filter 0.3s ease;
-  }
-
-  .header-top {
-    background: transparent;
-    border-bottom: 1px solid transparent;
-    backdrop-filter: blur(0px);
-    -webkit-backdrop-filter: blur(0px);
-  }
-
-  .header-scrolled {
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-
-  :global(:root.dark) .header-scrolled {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  }
-</style>
+  </div>
+{/if}
