@@ -135,21 +135,23 @@ const projects = [
 		id: "fireguard",
 		title: "FireGuard",
 		subtitle: "Telemetri Kebakaran Hutan & Monitoring Lingkungan IoT",
-		type: "Inovasi Agrotech (2024)",
+		type: "Inovasi Didanai PKM-PI & Juara Nasional (2024)",
 		role: "Mobile & Systems Developer",
 		link: "#",
 		deviceType: "browser-mobile",
-		badge: "TELEMETRI HARDWARE",
-		description: "Sistem pemantauan telemetri real-time yang menghubungkan node sensor IoT dengan API OpenWeatherMap untuk mendeteksi anomali kebakaran hutan dan mengirimkan notifikasi darurat.",
+		badge: "PENDANAAN PKM-PI & JUARA HARAPAN",
+		description: "Sistem pemantauan telemetri real-time yang berhasil lolos pendanaan Kemendikbudristek (PKM-PI). Menghubungkan node sensor IoT dengan API OpenWeatherMap untuk mendeteksi anomali kebakaran hutan dan mengirimkan notifikasi darurat.",
 		stackGroups: [
 			{ name: "Mobile & Telemetri", items: "Kotlin, Telemetry REST API" },
 			{ name: "Cloud & Peringatan", items: "Sensor Telemetry Services, OpenWeatherMap API, FCM Push" }
 		],
 		highlights: [
+			"Berhasil lolos pendanaan Kemendikbudristek Program Kreativitas Mahasiswa skema Penerapan IPTEK (PKM-PI)",
+			"Meraih Juara Harapan 3 PIMTANAS (Pekan Ilmiah Mahasiswa PTMA Nasional)",
+			"Meraih Juara Harapan 1 PKP2 PTMA (Penilaian Kemajuan Pelaksanaan PKM)",
 			"Pemrosesan telemetri sensor real-time dengan pemicu ambang batas peringatan dinamis",
 			"Peta risiko spasial interaktif memvisualisasikan suhu, kelembapan, dan area rawan api",
-			"Sistem notifikasi darurat cepat berbasis pesanan push berprioritas tinggi",
-			"Pipa konsumsi data telemetri REST yang andal dalam menangani pembaruan node sensor"
+			"Sistem notifikasi darurat cepat berbasis pesanan push berprioritas tinggi"
 		],
 		challenges: [
 			"Filtrasi data telemetri sensor yang bising secara real-time untuk mencegah alarm palsu",
@@ -158,11 +160,11 @@ const projects = [
 		previewData: {
 			title: "FireGuard Telemetry Center",
 			metrics: [
-				{ label: "Pipa Data", value: "Real-Time REST" },
-				{ label: "Integrasi", value: "OpenWeatherMap" },
-				{ label: "Peringatan", value: "Instant Push" }
+				{ label: "Status PKM", value: "Pendanaan PKM-PI" },
+				{ label: "PIMTANAS", value: "Harapan 3" },
+				{ label: "PKP2 PTMA", value: "Harapan 1" }
 			],
-			tags: ["Sensor Telemetri", "Peta Sebaran Api", "Status Thermal", "Telemetry Node"]
+			tags: ["Pendanaan PKM-PI", "Harapan 3 PIMTANAS", "Harapan 1 PKP2 PTMA", "Sensor Telemetri"]
 		}
 	}
 ];
@@ -175,7 +177,7 @@ const projects = [
   </head>
   <body class="relative overflow-x-hidden">
     <div class="ambient-glow"></div>
-    <Header client:load currentPath={Astro.url.pathname} />
+    <Header client:only="svelte" currentPath={Astro.url.pathname} />
 
     <main class="w-full pt-24 md:pt-32 pb-24">
       

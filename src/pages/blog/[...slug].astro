@@ -37,7 +37,7 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 250));
   </head>
   <body class="relative">
     <div class="ambient-glow"></div>
-    <Header client:load currentPath={Astro.url.pathname} />
+    <Header client:only="svelte" currentPath={Astro.url.pathname} />
     
     <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24 relative z-10 reveal">
       <div class="mb-12">

@@ -1,12 +1,14 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: "Geist", "Geist Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 @layer base {
-  :root {
+  :root, html {
     --bg: #fafafa;
     --text: #09090b;
     --card: rgba(255, 255, 255, 0.85);
@@ -18,7 +20,7 @@
     --accent-glow: rgba(5, 150, 105, 0.15);
   }
 
-  :root.dark {
+  :root.dark, html.dark {
     --bg: #09090b; /* Zinc 950 */
     --text: #fafafa;
     --card: rgba(24, 24, 27, 0.75); /* Zinc 900 */

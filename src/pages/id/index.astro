@@ -151,7 +151,7 @@ const skillCategories = [
     <!-- Ambient Background Mesh -->
     <div class="ambient-glow"></div>
 
-    <Header client:load currentPath={Astro.url.pathname} />
+    <Header client:only="svelte" currentPath={Astro.url.pathname} />
 
     <main class="w-full">
       
@@ -537,18 +537,6 @@ const skillCategories = [
     <style>
       .perspective-1000 {
         perspective: 1000px;
-      }
-      .rotate-y-\\[15deg\\] {
-        transform: rotateY(15deg);
-      }
-      .rotate-y-\\[-12deg\\] {
-        transform: rotateY(-12deg);
-      }
-      .rotate-x-\\[5deg\\] {
-        transform: rotateX(5deg);
-      }
-      .rotate-x-\\[8deg\\] {
-        transform: rotateX(8deg);
       }
       .will-change-transform {
         will-change: transform;

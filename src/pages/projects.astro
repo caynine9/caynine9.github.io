@@ -135,21 +135,23 @@ const projects = [
 		id: "fireguard",
 		title: "FireGuard",
 		subtitle: "Forest Fire Telemetry & Environmental Monitor",
-		type: "Agrotech Hardware Innovation (2024)",
+		type: "PKM-PI Funded & Award-Winning Agrotech Innovation (2024)",
 		role: "Mobile & Systems Developer",
 		link: "#",
 		deviceType: "browser-mobile",
-		badge: "HARDWARE TELEMETRY",
-		description: "Real-time telemetry and early warning system connecting custom IoT sensor nodes with OpenWeatherMap APIs to detect wildfire anomalies and trigger emergency push notifications.",
+		badge: "PKM-PI FUNDED & AWARD WINNER",
+		description: "Real-time IoT telemetry and early warning system funded by Kemendikbudristek (PKM-PI). Connects custom sensor nodes with OpenWeatherMap APIs to detect wildfire anomalies and trigger emergency push notifications.",
 		stackGroups: [
 			{ name: "Mobile & Telemetry", items: "Kotlin, Telemetry REST API" },
 			{ name: "Cloud & Alerts", items: "Sensor Telemetry Services, OpenWeatherMap API, FCM Push" }
 		],
 		highlights: [
+			"Funded under Kemendikbudristek Program Kreativitas Mahasiswa - Penerapan IPTEK (PKM-PI)",
+			"Awarded 3rd Runner Up (Juara Harapan 3) at PIMTANAS National Student Science Fair",
+			"Awarded 1st Runner Up (Juara Harapan 1) at PKP2 PTMA National Progress Evaluation",
 			"Real-time sensor telemetry processing with dynamic threshold alert triggers",
 			"Interactive geospatial risk map visualizing temperature, humidity, and fire danger zones",
-			"Emergency dispatch notification system powered by high-priority push messaging",
-			"Resilient REST telemetry ingestion pipeline handling continuous sensor node updates"
+			"Emergency dispatch notification system powered by high-priority push messaging"
 		],
 		challenges: [
 			"Filtering noisy sensor telemetry data streams in real time to eliminate false fire alarms",
@@ -158,11 +160,11 @@ const projects = [
 		previewData: {
 			title: "FireGuard Telemetry Center",
 			metrics: [
-				{ label: "Data Pipeline", value: "Real-Time REST" },
-				{ label: "Integration", value: "OpenWeatherMap" },
-				{ label: "Alerts", value: "Instant Push" }
+				{ label: "Grant Status", value: "PKM-PI Funded" },
+				{ label: "PIMTANAS", value: "Harapan 3" },
+				{ label: "PKP2 PTMA", value: "Harapan 1" }
 			],
-			tags: ["Sensor Telemetri", "Peta Sebaran Api", "Status Thermal", "Telemetry Node"]
+			tags: ["PKM-PI Lolos Pendanaan", "Juara Harapan 3 PIMTANAS", "Juara Harapan 1 PKP2", "Sensor Telemetri"]
 		}
 	}
 ];
@@ -175,7 +177,7 @@ const projects = [
   </head>
   <body class="relative overflow-x-hidden">
     <div class="ambient-glow"></div>
-    <Header client:load currentPath={Astro.url.pathname} />
+    <Header client:only="svelte" currentPath={Astro.url.pathname} />
 
     <main class="w-full pt-24 md:pt-32 pb-24">
       
